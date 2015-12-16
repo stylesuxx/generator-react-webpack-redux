@@ -12,7 +12,7 @@ module.exports = generator.NamedBase.extend({
     // Copy the store
     this.fs.copyTpl(
       this.templatePath('store.js'),
-      this.destinationPath(`src/stores/store.js`)
+      this.destinationPath(`src/stores/index.js`)
     );
 
     // Copy the root reducer
