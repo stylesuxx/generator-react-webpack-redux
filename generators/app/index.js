@@ -29,14 +29,13 @@ module.exports = generator.Base.extend({
       }
     ).on('end', () => {
 
-      // Run the create dispatcher method
-      this.composeWith('react-webpack-alt:dispatcher', {
-        options: {},
-        args: ['Dispatcher']
+      // Run the create root method
+      this.composeWith('react-webpack-redux:root', {
+        args: ['Root']
       });
 
       // Install redux and react bindings as requirement
-      this.npmInstall(['redux', 'react-redux'], { save: true });
+      this.npmInstall(['redux', 'react-redux', 'require-dir'], { save: true });
     });
   }
 });
