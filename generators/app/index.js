@@ -35,8 +35,8 @@ module.exports = generator.Base.extend({
         args: ['Dispatcher']
       });
 
-      // Install alt.js as requirement
-      this.npmInstall(['alt'], { save: true });
+      // Install redux and react bindings as requirement
+      this.npmInstall(['redux', 'react-redux'], { save: true });
     });
   }
 });
