@@ -1,27 +1,33 @@
 {
-  "name": "generator-react-webpack-alt",
-  "version": "2.0.0",
-  "description": "Yeoman generator for ReactJS and Flux (alt.js) via Webpack",
+  "name": "generator-react-webpack-redux",
+  "version": "0.0.0",
+  "description": "Yeoman generator for ReactJS and Flux (redux) via Webpack",
   "keywords": [
     "yeoman-generator",
     "reactjs",
     "webpack",
-    "alt.js",
+    "redux",
     "flux",
     "scaffold",
     "front-end"
   ],
-  "homepage": "https://github.com/weblogixx/generator-react-webpack-alt",
-  "bugs": "https://github.com/weblogixx/generator-react-webpack-alt/issues",
+  "homepage": "https://github.com/stylesuxx/generator-react-webpack-redux",
+  "bugs": "https://github.com/stylesuxx/generator-react-webpack-redux/issues",
   "author": {
-    "name": "Christian Schilling",
-    "email": "cs@weblogixx.de",
-    "url": "https://github.com/weblogixx"
+    "name": "Chris Landa",
+    "email": "stylesuxx@gmail.com",
   },
+  "contributors": [
+    {
+      "name": "Christian Schilling",
+      "email": "cs@weblogixx.de",
+      "url": "https://github.com/weblogixx"
+    }
+  ],
   "main": "generators/action/index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/weblogixx/generator-react-webpack-alt.git"
+    "url": "git://github.com/stylesuxx/generator-react-webpack-redux.git"
   },
   "scripts": {
     "test": "mocha",
