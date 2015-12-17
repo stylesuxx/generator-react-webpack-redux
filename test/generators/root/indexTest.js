@@ -18,14 +18,14 @@ describe('react-webpack-redux:root', () => {
       .on('end', callback);
   }
 
-  it('should create the root reducer and redux store when invoked', (done) => {
+  it('should create the root reducer, redux store and custom run.js', (done) => {
 
     createGeneratedDispatcher('Dispatcher', () => {
 
       assert.file([
         'src/stores/index.js',
         'src/reducers/index.js',
-        'src/constants/ActionTypes.js'
+        'src/components/run.js'
       ]);
 
       done();
