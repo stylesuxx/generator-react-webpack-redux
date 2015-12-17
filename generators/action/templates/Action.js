@@ -1,6 +1,7 @@
-import alt from 'components/Dispatcher';
+let types = require('../constants/ActionTypes');
 
-class <%= actionClass %> {
+const function <%= actionName %>(parameter) {
+  return { type: types.<%= actionConstant %>, parameter: parameter };
 }
 
-export default alt.createActions(<%= actionClass %>);
+export default <%= actionName %>;

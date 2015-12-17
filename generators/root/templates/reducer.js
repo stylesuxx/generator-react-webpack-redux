@@ -1,6 +1,5 @@
 const redux = require('redux');
-const requireDir = require('require-dir');
-const reducers = requireDir('./');
+const reducers = {};
 
 const root = redux.combineReducers(reducers);
 

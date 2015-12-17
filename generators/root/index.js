@@ -20,5 +20,11 @@ module.exports = generator.NamedBase.extend({
       this.templatePath('reducer.js'),
       this.destinationPath(`src/reducers/index.js`)
     );
+
+    // Copy the constants
+    this.fs.copyTpl(
+      this.templatePath('ActionTypes.js'),
+      this.destinationPath(`src/constants/ActionTypes.js`)
+    );
   }
 });
