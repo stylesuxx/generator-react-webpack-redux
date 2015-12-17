@@ -20,7 +20,7 @@ describe('react-webpack-redux:reducer', () => {
         .on('end', callback);
     }
 
-    it('should create the a reducer when invoked', (done) => {
+    it('should create a reducer when invoked', (done) => {
 
       createGeneratedReducer('test', () => {
         assert.file([
@@ -31,10 +31,13 @@ describe('react-webpack-redux:reducer', () => {
       });
     });
 
-    it('should create the stores unit test', (done) => {
+    it('should create the reducers unit test', (done) => {
 
       createGeneratedReducer('test', () => {
-        assert.file(['test/reducers/testTest.js']);
+        assert.file([
+          'test/reducers/testTest.js'
+        ]);
+
         done();
       });
     });
