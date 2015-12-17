@@ -32,6 +32,10 @@ module.exports = generator.NamedBase.extend({
       this.destinationPath(`src/components/run.js`)
     );
 
-    // TODO: Copy the app container
+    // Copy the app container
+    this.fs.copy(
+      this.templatePath('App.js'),
+      this.destinationPath(`src/containers/App.js`)
+    );
   }
 });
