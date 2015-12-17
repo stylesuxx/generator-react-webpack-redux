@@ -1,6 +1,6 @@
 let types = require('../constants/ActionTypes');
 
-const function <%= actionName %>(parameter) {
+const <%= actionName %> = function(parameter) {
   return { type: types.<%= actionConstant %>, parameter: parameter };
 }
 
