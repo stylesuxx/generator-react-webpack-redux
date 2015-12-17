@@ -24,7 +24,8 @@ describe('react-webpack-redux:root', () => {
 
       assert.file([
         'src/stores/index.js',
-        'src/reducers/index.js'
+        'src/reducers/index.js',
+        'src/constants/ActionTypes.js'
       ]);
 
       done();
