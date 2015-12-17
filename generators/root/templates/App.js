@@ -1,3 +1,6 @@
+require('normalize.css');
+require('styles/App.css');
+
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
