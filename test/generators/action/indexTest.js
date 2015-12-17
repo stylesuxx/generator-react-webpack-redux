@@ -3,7 +3,7 @@ let path = require('path');
 let assert = require('yeoman-generator').assert;
 let helpers = require('yeoman-generator').test
 
-describe('react-webpack-alt:action', () => {
+describe('react-webpack-reduc:action', () => {
 
   let generatorAction = path.join(__dirname, '../../../generators/action');
 
@@ -20,26 +20,26 @@ describe('react-webpack-alt:action', () => {
 
   describe('When creating a new action', () => {
 
-    it('should create the store file', (done) => {
-      createGeneratedAction('test', () => {
-        assert.file([ 'src/actions/TestActions.js' ]);
+    it('should create the action file', (done) => {
+
+      createGeneratedAction('getItem', () => {
+        assert.file([ 'src/actions/getItem.js' ]);
         done();
       });
     });
 
-    it('should include an import statement for the alt dispatcher', (done) => {
+    it('should export the action', (done) => {
 
-      createGeneratedAction('test', () => {
-        assert.fileContent('src/actions/TestActions.js', `import alt from 'components/Dispatcher';`);
+      createGeneratedAction('getItem', () => {
+        assert.fileContent('src/actions/getItem.js', 'export default getItem;');
         done();
       });
     });
 
-    it('should export the alt action', (done) => {
+    it('should append the action to the constants', (done) => {
 
-      createGeneratedAction('test', () => {
-        assert.fileContent('src/actions/TestActions.js', `class TestActions`);
-        assert.fileContent('src/actions/TestActions.js', `export default alt.createActions(TestActions);`);
+      createGeneratedAction('getItem', () => {
+        assert.fileContent('src/constants/ActionTypes.js', 'export const GET_ITEM = \'GET_ITEM\';');
         done();
       });
     });
