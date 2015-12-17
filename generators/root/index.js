@@ -8,17 +8,30 @@ module.exports = generator.NamedBase.extend({
   },
 
   writing: function() {
+    /* Some base functionality needs to be overwritten, so we force yeoman to do
+     * so. This is not the nicest thing to do, but since this changes are needed
+     * it does not make sense to give the user a choice.
+     */
+    this.conflicter.force = true;
 
     // Copy the store
-    this.fs.copyTpl(
+    this.fs.copy(
       this.templatePath('store.js'),
       this.destinationPath(`src/stores/index.js`)
     );
 
     // Copy the root reducer
-    this.fs.copyTpl(
+    this.fs.copy(
       this.templatePath('reducer.js'),
       this.destinationPath(`src/reducers/index.js`)
     );
+
+    // Copy the run script over the original run script.
+    this.fs.copy(
+      this.templatePath('run.js'),
+      this.destinationPath(`src/components/run.js`)
+    );
+
+    // TODO: Copy the app container
   }
 });
