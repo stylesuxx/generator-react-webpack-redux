@@ -32,12 +32,5 @@ describe('react-webpack-redux:action', () => {
         done();
       });
     });
-
-    it('should append the action to the constants', (done) => {
-      createGeneratedAction('getItem', () => {
-        assert.fileContent('src/constants/ActionTypes.js', 'export const GET_ITEM = \'GET_ITEM\';');
-        done();
-      });
-    });
   });
 });
