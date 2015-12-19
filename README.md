@@ -1,7 +1,7 @@
-# generator-react-webpack-alt
-> Generator-React-Webpack - with Flux Support (using alt.js)
+# generator-react-webpack-redux
+> Generator-React-Webpack - with Flux Support (using Redux)
 
-[![Build Status](https://travis-ci.org/weblogixx/generator-react-webpack-alt.svg?branch=master)](https://travis-ci.org/weblogixx/generator-react-webpack-alt) ![Amount of Downloads per month](https://img.shields.io/npm/dm/generator-react-webpack-alt.svg "Amount of Downloads") ![Dependency Tracker](https://img.shields.io/david/weblogixx/generator-react-webpack-alt.svg "Dependency Tracker") ![Dependency Tracker](https://img.shields.io/david/dev/weblogixx/generator-react-webpack-alt.svg "Dependency Tracker") ![Node Version](https://img.shields.io/node/v/generator-react-webpack-alt.svg "Node Version")
+[![Build Status](https://travis-ci.org/stylesuxx/generator-react-webpack-redux.svg?branch=master)](https://travis-ci.org/stylesuxx/generator-react-webpack-redux) ![Amount of Downloads per month](https://img.shields.io/npm/dm/generator-react-webpack-redux.svg "Amount of Downloads") ![Dependency Tracker](https://img.shields.io/david/stylesuxx/generator-react-webpack-redux.svg "Dependency Tracker") ![Dependency Tracker](https://img.shields.io/david/dev/stylesuxx/generator-react-webpack-redux.svg "Dependency Tracker") ![Node Version](https://img.shields.io/node/v/generator-react-webpack-redux.svg "Node Version")
 
 
 ## What is it for?
