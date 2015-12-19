@@ -1,50 +1,42 @@
-require('normalize.css');
-require('styles/App.css');
-
+/* CAUTION: When using the generators, this file is modified in some places.
+ *          This is done via AST traversal - Some of your formatting may be lost
+ *          in the process - no functionality should be broken though.
+ *          This modifications only run once when the generator is invoked - if
+ *          you edit them, they are not updated again.
+ */
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
-let yeomanImage = require('../images/yeoman.png');
-
+import Main from '../components/Main';
+/* Populated by react-webpack-redux:reducer */
 class App extends Component {
   render() {
-    const { actions /*, todos*/ } = this.props
+    const {actions} = this.props;
     return (
-      <div className="index">
-        <img src={yeomanImage} alt="Yeoman Generator" />
-        <div className="notice">Please edit <code>src/containers/App.js</code> to get started!</div>
-      </div>
-    )
+      <Main actions={actions}/>
+    );
   }
 }
-
+/* Populated by react-webpack-redux:reducer
+ *
+ * HINT: if you adjust the initial type of your reducer, you will also have to
+ *       adjust it here.
+ */
 App.propTypes = {
-  // TODO: Append here if reducers are added
-  /*todos: PropTypes.array.isRequired,*/
   actions: PropTypes.object.isRequired
 };
-
 function mapStateToProps(state) {
-  const props = {
-    // TODO: Append here if reducers are added
-    /*items: state.items*/
-  };
-
+  /* Populated by react-webpack-redux:reducer */
+  const props = {};
   return props;
 }
-
 function mapDispatchToProps(dispatch) {
-  const actions = {
-    // TODO: Append here if actions are added
-    /*getItems: require(../src/actions/getItems.js)*/
-  };
-
-  return {
-    actions: bindActionCreators(actions, dispatch)
-  };
+  /* TODO: Append here if actions are added */
+  /*getItems: require(../src/actions/getItems.js) */
+  const actions = {};
+  const actionMap = { actions: bindActionCreators(actions, dispatch) };
+  return actionMap;
 }
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps
