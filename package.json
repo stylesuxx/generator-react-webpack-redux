@@ -36,6 +36,9 @@
     "release:patch": "npm version patch && npm publish && git push --follow-tags"
   },
   "dependencies": {
+    "escodegen-wallaby": "^1.6.5",
+    "esprima-fb": "^15001.1001.0-dev-harmony-fb",
+    "esprima-walk": "^0.1.0",
     "generator-react-webpack": "^3.0.0",
     "html-wiring": "^1.2.0",
     "yeoman-generator": "^0.21.0",
@@ -43,6 +46,7 @@
   },
   "devDependencies": {
     "chai": "^3.2.0",
+    "fs-extra": "^0.26.3",
     "mocha": "^2.3.2"
   },
   "engines": {
