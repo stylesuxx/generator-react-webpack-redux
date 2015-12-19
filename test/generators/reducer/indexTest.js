@@ -57,6 +57,7 @@ describe('react-webpack-redux:reducer', () => {
     it('should add the reducer to the root reducer', (done) => {
 
       createGeneratedReducer('test', () => {
+        assert.fileContent(rootReducerPath, '/* Populated by react-webpack-redux:reducer */');
         assert.fileContent(rootReducerPath, 'test: require(\'./test.js\')');
         done();
       });
@@ -65,7 +66,11 @@ describe('react-webpack-redux:reducer', () => {
     it('should add the reducer to App.js', (done) => {
 
       createGeneratedReducer('test', () => {
+        assert.fileContent(appPath, '/* Populated by react-webpack-redux:reducer */');
         assert.fileContent(appPath, 'test: state.test');
+        assert.fileContent(appPath, 'test: PropTypes.object.isRequired');
+        assert.fileContent(appPath, 'const {actions, test} = this.props;');
+        assert.fileContent(appPath, '<Main actions={actions} test={test}/>');
         done();
       });
     });
