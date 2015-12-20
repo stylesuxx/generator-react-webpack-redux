@@ -1,6 +1,5 @@
-import alt from 'components/Dispatcher';
-
-class <%= actionClass %> {
+const <%= actionName %> = function(parameter) {
+  return { type: '<%= actionConstant %>', parameter};
 }
 
-export default alt.createActions(<%= actionClass %>);
+module.exports = <%= actionName %>;
