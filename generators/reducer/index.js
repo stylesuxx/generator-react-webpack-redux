@@ -2,7 +2,7 @@
 let generator = require('yeoman-generator');
 let path = require('path');
 let walk = require('esprima-walk');
-let astHelpers = require('../app/astHelpers');
+let utils = require('../app/utils');
 
 module.exports = generator.NamedBase.extend({
   constructor: function() {
@@ -21,14 +21,14 @@ module.exports = generator.NamedBase.extend({
         }
       };
 
-      let tree = astHelpers.read(path);
+      let tree = utils.read(path);
       walk(tree, function(node) {
         if(node.type === 'VariableDeclarator' && node.id.name === 'reducers') {
           node.init.properties.push(reducerNode);
         }
       });
 
-      astHelpers.write(path, tree);
+      utils.write(path, tree);
     };
 
     this.attachToApp = function(path, name) {
@@ -43,7 +43,7 @@ module.exports = generator.NamedBase.extend({
         }
       };
 
-      let tree = astHelpers.read(path);
+      let tree = utils.read(path);
       walk(tree, function(node) {
         // Map reducer to state props
         if(node.type === 'VariableDeclarator' && node.id.name === 'props') {
@@ -94,7 +94,7 @@ module.exports = generator.NamedBase.extend({
         }
       });
 
-      astHelpers.write(path, tree);
+      utils.write(path, tree);
     };
   },
 
