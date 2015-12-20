@@ -1,5 +1,6 @@
 'use strict';
 let fs = require('fs');
+let path = require('path');
 
 /* For regular JS files */
 //let esprima = require('esprima');
@@ -28,5 +29,25 @@ const write = function(path, tree) {
   fs.writeFileSync(path, code, 'utf8');
 };
 
-module.exports.read = read;
-module.exports.write = write;
+const getDestinationPath = function(name, type, suffix) {
+  const prefix = path.join('src', type, name);
+  return [prefix, suffix].join('.');
+};
+
+const getRelativePath = function(name, type, suffix) {
+  const prefix = path.join('..', type, name);
+  return [prefix, suffix].join('.');
+};
+
+const getBaseName = function(path) {
+  const items = path.split('/');
+  return items[items.length - 1];
+}
+
+module.exports = {
+  read: read,
+  write: write,
+  getDestinationPath: getDestinationPath,
+  getBaseName: getBaseName,
+  getRelativePath: getRelativePath
+}
