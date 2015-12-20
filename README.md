@@ -14,14 +14,8 @@ It also has support for the the features that are available in its parent projec
 ## Planned Features and updates
 There are currently some features missing from the generator. These will be available in a later version:
 
-- [x] Creation of Components like in Generator-React-Webpack
-- [ ] Creation of Reducers
-- [x] Creation of Actions
 - [ ] Creation of Unittests for Actions
 - [ ] Creation of Containers
-- [x] Add a correct versioning for [generator-react-webpack](https://github.com/newtriks/generator-react-webpack) so we dont need to draw the current git master.
-
----
 
 ## Installation
 ```bash
