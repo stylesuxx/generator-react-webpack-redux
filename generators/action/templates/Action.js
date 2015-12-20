@@ -1,8 +1,5 @@
 const <%= actionName %> = function(parameter) {
-  return {
-    type: '<%= actionConstant %>',
-    parameter: parameter
-  };
+  return { type: '<%= actionConstant %>', parameter};
 }
 
-export default <%= actionName %>;
+module.exports = <%= actionName %>;

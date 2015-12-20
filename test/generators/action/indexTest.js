@@ -35,7 +35,7 @@ describe('react-webpack-redux:action', () => {
 
     it('should export the action', (done) => {
       createGeneratedAction('getItem', () => {
-        assert.fileContent('src/actions/getItem.js', 'export default getItem;');
+        assert.fileContent('src/actions/getItem.js', 'module.exports = getItem;');
         done();
       });
     });
