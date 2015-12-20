@@ -47,7 +47,8 @@
   "devDependencies": {
     "chai": "^3.2.0",
     "fs-extra": "^0.26.3",
-    "mocha": "^2.3.2"
+    "mocha": "^2.3.2",
+    "yeoman-assert": "^2.1.1"
   },
   "engines": {
     "node": ">=4.0.0",
