@@ -1,16 +1,8 @@
 'use strict';
 let generator = require('yeoman-generator');
 let path = require('path');
-let fs = require('fs');
 let walk = require('esprima-walk');
-
-/* For regular JS files */
-//let esprima = require('esprima');
-//let escodegen = require('escodegen');
-
-/* For files with JSX syntax */
-let esprimaFb = require('esprima-fb');
-let escodegenJsx = require('escodegen-wallaby');
+let astHelpers = require('../app/astHelpers');
 
 module.exports = generator.NamedBase.extend({
   constructor: function() {
@@ -29,14 +21,14 @@ module.exports = generator.NamedBase.extend({
         }
       };
 
-      let tree = this.read(path);
+      let tree = astHelpers.read(path);
       walk(tree, function(node) {
         if(node.type === 'VariableDeclarator' && node.id.name === 'reducers') {
           node.init.properties.push(reducerNode);
         }
       });
 
-      this.write(path, tree);
+      astHelpers.write(path, tree);
     };
 
     this.attachToApp = function(path, name) {
@@ -51,7 +43,7 @@ module.exports = generator.NamedBase.extend({
         }
       };
 
-      let tree = this.read(path);
+      let tree = astHelpers.read(path);
       walk(tree, function(node) {
         // Map reducer to state props
         if(node.type === 'VariableDeclarator' && node.id.name === 'props') {
@@ -102,26 +94,7 @@ module.exports = generator.NamedBase.extend({
         }
       });
 
-      this.write(path, tree);
-    };
-
-    this.read = function(path) {
-      const data = fs.readFileSync(path, 'utf8');
-      const options = {
-        sourceType: 'module',
-        range: true,
-        tokens: true,
-        comment: true
-      };
-
-      return esprimaFb.parse(data, options);
-    };
-
-    this.write = function(path, tree) {
-      tree = escodegenJsx.attachComments(tree, tree.comments, tree.tokens);
-      let options = { comment: true, format: { indent: { style: '  ' } } };
-      let code = escodegenJsx.generate(tree, options);
-      fs.writeFileSync(path, code, 'utf8');
+      astHelpers.write(path, tree);
     };
   },
 
