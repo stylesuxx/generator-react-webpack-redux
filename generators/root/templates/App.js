@@ -4,7 +4,10 @@
  *          This modifications only run once when the generator is invoked - if
  *          you edit them, they are not updated again.
  */
-import React, { Component, PropTypes } from 'react';
+import React, {
+  Component,
+  PropTypes
+} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Main from '../components/Main';
@@ -12,9 +15,7 @@ import Main from '../components/Main';
 class App extends Component {
   render() {
     const {actions} = this.props;
-    return (
-      <Main actions={actions}/>
-    );
+    return <Main actions={actions}/>;
   }
 }
 /* Populated by react-webpack-redux:reducer
@@ -36,7 +37,4 @@ function mapDispatchToProps(dispatch) {
   const actionMap = { actions: bindActionCreators(actions, dispatch) };
   return actionMap;
 }
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
