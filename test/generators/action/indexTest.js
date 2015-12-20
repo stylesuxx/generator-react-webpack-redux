@@ -2,9 +2,12 @@
 let path = require('path');
 let assert = require('yeoman-generator').assert;
 let helpers = require('yeoman-generator').test;
+let fs = require('fs-extra');
 
 describe('react-webpack-redux:action', () => {
-  let generatorAction = path.join(__dirname, '../../../generators/action');
+  const appSource = path.join(__dirname, '../../../generators/root/templates/App.js');
+  const generatorAction = path.join(__dirname, '../../../generators/action');
+  let appPath = ''
 
   /**
    * Return a newly generated action with given name
@@ -13,6 +16,10 @@ describe('react-webpack-redux:action', () => {
    */
   function createGeneratedAction(name, callback) {
     helpers.run(generatorAction)
+      .inTmpDir(function(tmpDir) {
+        appPath = path.join(tmpDir, 'src/containers/App.js');
+        fs.copySync(appSource, appPath);
+      })
       .withArguments([name])
       .on('end', callback);
   }
@@ -29,6 +36,14 @@ describe('react-webpack-redux:action', () => {
     it('should export the action', (done) => {
       createGeneratedAction('getItem', () => {
         assert.fileContent('src/actions/getItem.js', 'export default getItem;');
+        done();
+      });
+    });
+
+    it('should add the action to App.js', (done) => {
+      createGeneratedAction('items/getItems', () => {
+        assert.fileContent(appPath, '/* Populated by react-webpack-redux:action */');
+        assert.fileContent(appPath, 'getItems: require(\'../actions/items/getItems.js\')');
         done();
       });
     });
