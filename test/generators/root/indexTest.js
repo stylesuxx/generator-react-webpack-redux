@@ -1,11 +1,11 @@
 'use strict';
 let path = require('path');
-let assert = require('yeoman-generator').assert;
-let helpers = require('yeoman-generator').test
+let assert = require('yeoman-assert');
+let helpers = require('yeoman-test');
 
-describe('react-webpack-alt:dispatcher', () => {
+describe('react-webpack-redux:root', () => {
 
-  let generatorDispatcher = path.join(__dirname, '../../../generators/dispatcher');
+  let generatorDispatcher = path.join(__dirname, '../../../generators/root');
 
   /**
    * Return a newly generated dispatcher with given name
@@ -18,14 +18,16 @@ describe('react-webpack-alt:dispatcher', () => {
       .on('end', callback);
   }
 
-  it('should create the new ALT dispatcher when invoked', (done) => {
+  it('should create the root reducer, redux store, base container and custom run.js', (done) => {
 
     createGeneratedDispatcher('Dispatcher', () => {
 
       assert.file([
-        'src/components/Dispatcher.js'
+        'src/stores/index.js',
+        'src/reducers/index.js',
+        'src/components/run.js',
+        'src/containers/App.js'
       ]);
-      assert.fileContent('src/components/Dispatcher.js', 'var Alt = require(\'alt\');');
 
       done();
     });

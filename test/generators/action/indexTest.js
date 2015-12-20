@@ -1,11 +1,13 @@
 'use strict';
 let path = require('path');
-let assert = require('yeoman-generator').assert;
-let helpers = require('yeoman-generator').test
+let assert = require('yeoman-assert');
+let helpers = require('yeoman-test');
+let fs = require('fs-extra');
 
-describe('react-webpack-alt:action', () => {
-
-  let generatorAction = path.join(__dirname, '../../../generators/action');
+describe('react-webpack-redux:action', () => {
+  const appSource = path.join(__dirname, '../../../generators/root/templates/App.js');
+  const generatorAction = path.join(__dirname, '../../../generators/action');
+  let appPath = ''
 
   /**
    * Return a newly generated action with given name
@@ -14,32 +16,34 @@ describe('react-webpack-alt:action', () => {
    */
   function createGeneratedAction(name, callback) {
     helpers.run(generatorAction)
+      .inTmpDir(function(tmpDir) {
+        appPath = path.join(tmpDir, 'src/containers/App.js');
+        fs.copySync(appSource, appPath);
+      })
       .withArguments([name])
       .on('end', callback);
   }
 
   describe('When creating a new action', () => {
 
-    it('should create the store file', (done) => {
-      createGeneratedAction('test', () => {
-        assert.file([ 'src/actions/TestActions.js' ]);
+    it('should create the action file', (done) => {
+      createGeneratedAction('getItem', () => {
+        assert.file(['src/actions/getItem.js']);
         done();
       });
     });
 
-    it('should include an import statement for the alt dispatcher', (done) => {
-
-      createGeneratedAction('test', () => {
-        assert.fileContent('src/actions/TestActions.js', `import alt from 'components/Dispatcher';`);
+    it('should export the action', (done) => {
+      createGeneratedAction('getItem', () => {
+        assert.fileContent('src/actions/getItem.js', 'module.exports = getItem;');
         done();
       });
     });
 
-    it('should export the alt action', (done) => {
-
-      createGeneratedAction('test', () => {
-        assert.fileContent('src/actions/TestActions.js', `class TestActions`);
-        assert.fileContent('src/actions/TestActions.js', `export default alt.createActions(TestActions);`);
+    it('should add the action to App.js', (done) => {
+      createGeneratedAction('items/getItems', () => {
+        assert.fileContent(appPath, '/* Populated by react-webpack-redux:action */');
+        assert.fileContent(appPath, 'getItems: require(\'../actions/items/getItems.js\')');
         done();
       });
     });
