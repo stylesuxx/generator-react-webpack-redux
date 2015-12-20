@@ -56,9 +56,9 @@ describe('react-webpack-redux:reducer', () => {
 
     it('should add the reducer to the root reducer', (done) => {
 
-      createGeneratedReducer('test', () => {
+      createGeneratedReducer('namespaced/test', () => {
         assert.fileContent(rootReducerPath, '/* Populated by react-webpack-redux:reducer */');
-        assert.fileContent(rootReducerPath, 'test: require(\'./test.js\')');
+        assert.fileContent(rootReducerPath, '{ test: require(\'./namespaced/test.js\')');
         done();
       });
     });
