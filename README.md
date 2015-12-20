@@ -38,11 +38,6 @@ mkdir my-new-project && cd my-new-project
 yo react-webpack-redux
 ```
 
-## Generating new components
-```bash
-yo react-webpack-redux:component my/namespaced/components/name
-```
-
 ## Generating new reducers
 ```bash
 yo react-webpack-redux:reducer my/namespaced/reducers/name
@@ -51,6 +46,11 @@ yo react-webpack-redux:reducer my/namespaced/reducers/name
 ## Generating new actions
 ```bash
 yo react-webpack-redux:action my/namespaced/actions/name
+```
+
+## Generating new components
+```bash
+yo react-webpack-redux:component my/namespaced/components/name
 ```
 
 ## Usage
