@@ -4,9 +4,10 @@ let path = require('path');
 let walk = require('esprima-walk');
 let utils = require('../app/utils');
 
-module.exports = generator.NamedBase.extend({
+module.exports = generator.Base.extend({
   constructor: function() {
-    generator.NamedBase.apply(this, arguments);
+    generator.Base.apply(this, arguments);
+    this.argument('name', { type: String, required: true });
 
     this.attachToRoot = function(path, relativePath, name) {
       const reducerNode = {

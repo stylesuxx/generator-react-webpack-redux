@@ -1,10 +1,11 @@
 'use strict';
 let generator = require('yeoman-generator');
 
-module.exports = generator.NamedBase.extend({
+module.exports = generator.Base.extend({
 
   constructor: function() {
-    generator.NamedBase.apply(this, arguments);
+    generator.Base.apply(this, arguments);
+    this.argument('name', { type: String, required: true });
   },
 
   writing: function() {
