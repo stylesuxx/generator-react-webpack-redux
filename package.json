@@ -41,7 +41,7 @@
     "esprima-walk": "^0.1.0",
     "generator-react-webpack": "^3.0.0",
     "html-wiring": "^1.2.0",
-    "yeoman-generator": "^0.21.0",
+    "yeoman-generator": "^0.22.0",
     "yeoman-welcome": "^1.0.1"
   },
   "devDependencies": {
