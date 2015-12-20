@@ -14,7 +14,6 @@ It also has support for the the features that are available in its parent projec
 ## Planned Features and updates
 There are currently some features missing from the generator. These will be available in a later version:
 
-- [ ] Hot reload after editing reducers
 - [ ] Creation of Containers
 
 ## Installation
