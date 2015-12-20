@@ -8,8 +8,7 @@ module.exports = generator.NamedBase.extend({
   constructor: function() {
     generator.NamedBase.apply(this, arguments);
 
-    this.attachToRoot = function(path, name) {
-      const reducerPath = ['./', name, '.js'].join('');
+    this.attachToRoot = function(path, relativePath, name) {
       const reducerNode = {
         type: 'Property',
         kind: 'init',
@@ -17,7 +16,7 @@ module.exports = generator.NamedBase.extend({
         value: {
           type: 'CallExpression',
           callee: { type: 'Identifier', name: 'require' },
-          arguments: [ { type: 'Literal', value: reducerPath } ]
+          arguments: [ { type: 'Literal', value: relativePath } ]
         }
       };
 
@@ -99,16 +98,17 @@ module.exports = generator.NamedBase.extend({
   },
 
   writing: function() {
-    let baseName = this.name;
-    let destinationPath = path.join('src', 'reducers', baseName + '.js');
-    let rootReducerPath = this.destinationPath(path.join('src', 'reducers', 'index.js'));
-    let appPath = this.destinationPath(path.join('src', 'containers', 'App.js'));
-    let testDestinationPath = path.join('test', 'reducers', baseName + 'Test.js');
+    const appPath = this.destinationPath('src/containers/App.js');
+    const rootReducerPath = this.destinationPath('src/reducers/index.js');
+    const destination = utils.getDestinationPath(this.name, 'reducers', 'js');
+    const baseName = utils.getBaseName(this.name);
+    const testDestinationPath = path.join('test', 'reducers', baseName + 'Test.js');
+    const relativePath = utils.getRelativePath(this.name, 'reducers', 'js');
 
     // Copy the reducer template
     this.fs.copyTpl(
       this.templatePath('reducer.js'),
-      this.destinationPath(destinationPath),
+      this.destinationPath(destination),
       { reducerName: baseName }
     );
 
@@ -120,7 +120,7 @@ module.exports = generator.NamedBase.extend({
     );
 
     // Add the reducer to the root reducer
-    this.attachToRoot(rootReducerPath, baseName);
+    this.attachToRoot(rootReducerPath, relativePath, baseName);
 
     // Add the reducer to App.js
     this.attachToApp(appPath, baseName);

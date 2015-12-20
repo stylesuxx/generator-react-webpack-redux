@@ -34,8 +34,8 @@ const getDestinationPath = function(name, type, suffix) {
   return [prefix, suffix].join('.');
 };
 
-const getRelativePath = function(name, type, prefix, suffix) {
-  const filePath = path.join(prefix, type, name);
+const getRelativePath = function(name, type, suffix) {
+  const filePath = path.join('..', type, name);
   return [filePath, suffix].join('.');
 };
 
