@@ -31,8 +31,7 @@ function mapStateToProps(state) {
   return props;
 }
 function mapDispatchToProps(dispatch) {
-  /* TODO: Append here if actions are added */
-  /*getItems: require(../src/actions/getItems.js) */
+  /* Populated by react-webpack-redux:action */
   const actions = {};
   const actionMap = { actions: bindActionCreators(actions, dispatch) };
   return actionMap;
