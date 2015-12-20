@@ -1,7 +1,7 @@
 'use strict';
 let path = require('path');
 let assert = require('yeoman-assert');
-let helpers = require('yeoman-generator').test;
+let helpers = require('yeoman-test');
 let fs = require('fs-extra');
 
 describe('react-webpack-redux:reducer', () => {
