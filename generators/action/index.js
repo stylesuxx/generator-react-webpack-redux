@@ -36,7 +36,7 @@ module.exports = generator.NamedBase.extend({
     const destination = utils.getDestinationPath(this.name, 'actions', 'js');
     const baseName = utils.getBaseName(this.name);
     const constantName = (baseName.split(/(?=[A-Z])/).join('_')).toUpperCase();
-    const relativePath = utils.getRelativePath(this.name, 'actions', 'js');
+    const relativePath = utils.getRelativePath(this.name, 'actions', '..', 'js');
 
     // Copy action template
     this.fs.copyTpl(
