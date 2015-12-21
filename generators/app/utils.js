@@ -1,14 +1,14 @@
 'use strict';
-let fs = require('fs');
-let path = require('path');
+const fs = require('fs');
+const path = require('path');
 
 /* For regular JS files */
-//let esprima = require('esprima');
-//let escodegen = require('escodegen');
+//const esprima = require('esprima');
+//const escodegen = require('escodegen');
 
 /* For files with JSX syntax */
-let esprimaFb = require('esprima-fb');
-let escodegenJsx = require('escodegen-wallaby');
+const esprimaFb = require('esprima-fb');
+const escodegenJsx = require('escodegen-wallaby');
 
 const read = function(path) {
   const data = fs.readFileSync(path, 'utf8');
@@ -24,8 +24,8 @@ const read = function(path) {
 
 const write = function(path, tree) {
   tree = escodegenJsx.attachComments(tree, tree.comments, tree.tokens);
-  let options = { comment: true, format: { indent: { style: '  ' } } };
-  let code = escodegenJsx.generate(tree, options) + '\n';
+  const options = { comment: true, format: { indent: { style: '  ' } } };
+  const code = escodegenJsx.generate(tree, options) + '\n';
   fs.writeFileSync(path, code, 'utf8');
 };
 
