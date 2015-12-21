@@ -107,10 +107,9 @@ module.exports = generator.Base.extend({
     const relativePath = utils.getRelativePath(this.name, 'reducers', 'js');
 
     // Copy the reducer template
-    this.fs.copyTpl(
+    this.fs.copy(
       this.templatePath('reducer.js'),
-      this.destinationPath(destination),
-      { reducerName: baseName }
+      this.destinationPath(destination)
     );
 
     // Copy the reducers unit test

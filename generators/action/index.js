@@ -43,10 +43,7 @@ module.exports = generator.Base.extend({
     this.fs.copyTpl(
       this.templatePath('Action.js'),
       this.destinationPath(destination),
-      {
-        actionName: baseName,
-        actionConstant: constantName
-      }
+      { actionConstant: constantName }
     );
 
     // Add action to App.js

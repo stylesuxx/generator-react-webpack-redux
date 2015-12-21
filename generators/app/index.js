@@ -35,7 +35,7 @@ module.exports = generator.Base.extend({
       });
 
       // Install redux and react bindings as requirement
-      this.npmInstall(['redux', 'react-redux', 'require-dir'], { save: true });
+      this.npmInstall(['redux', 'react-redux'], { save: true });
     });
   }
 });
