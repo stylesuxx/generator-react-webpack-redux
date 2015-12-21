@@ -1,7 +1,7 @@
 const redux = require('redux');
 const reducers = require('../reducers');
 
-const configureStore = function(initialState) {
+module.exports = function(initialState) {
   const store = redux.createStore(reducers, initialState)
 
   if (module.hot) {
@@ -14,5 +14,3 @@ const configureStore = function(initialState) {
 
   return store
 }
-
-module.exports = configureStore;
