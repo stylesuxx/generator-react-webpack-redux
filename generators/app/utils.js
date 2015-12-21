@@ -25,7 +25,7 @@ const read = function(path) {
 const write = function(path, tree) {
   tree = escodegenJsx.attachComments(tree, tree.comments, tree.tokens);
   let options = { comment: true, format: { indent: { style: '  ' } } };
-  let code = escodegenJsx.generate(tree, options);
+  let code = escodegenJsx.generate(tree, options) + '\n';
   fs.writeFileSync(path, code, 'utf8');
 };
 
