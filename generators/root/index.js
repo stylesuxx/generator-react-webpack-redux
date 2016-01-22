@@ -27,10 +27,10 @@ module.exports = generator.Base.extend({
       this.destinationPath(`src/reducers/index.js`)
     );
 
-    // Copy the run script over the original run script.
+    // Copy the entry point over the original entry point
     this.fs.copy(
-      this.templatePath('run.js'),
-      this.destinationPath(`src/components/run.js`)
+      this.templatePath('index.js'),
+      this.destinationPath(`src/index.js`)
     );
 
     // Copy the app container
