@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/stylesuxx/generator-react-webpack-redux.svg?branch=master)](https://travis-ci.org/stylesuxx/generator-react-webpack-redux) ![Amount of Downloads per month](https://img.shields.io/npm/dm/generator-react-webpack-redux.svg "Amount of Downloads") [![Dependency Status](https://david-dm.org/stylesuxx/generator-react-webpack-redux.svg)](https://david-dm.org/stylesuxx/generator-react-webpack-redux) [![devDependency Status](https://david-dm.org/stylesuxx/generator-react-webpack-redux/dev-status.svg)](https://david-dm.org/stylesuxx/generator-react-webpack-redux#info=devDependencies) ![Node Version](https://img.shields.io/node/v/generator-react-webpack-redux.svg "Node Version")
 
 ## What is it for?
-This generator can be used to create and manage projects that use React, Webpack and Flux (using [Redux](https://github.com/rackt/redux) as implementation). It depends on [generator-react-webpack](https://github.com/newtriks/generator-react-webpack) as a base and extends it to create new stores and actions.
+This generator can be used to create and manage projects that use React, Webpack and Flux (using [Redux](https://github.com/rackt/redux) as implementation). It depends on [generator-react-webpack](https://github.com/newtriks/generator-react-webpack) as a base and extends it to create new reducers and actions.
 
 ## What is included?
 generator-react-webpack-redux includes support for creating new reducers (and tests), as well as the creation of actions and components.
@@ -14,6 +14,7 @@ It also has support for the the features that are available in its parent projec
 ## Planned Features and updates
 There are currently some features missing from the generator. These will be available in a later version:
 
+- [ ] Add optional routing via [react-router-redux](https://github.com/rackt/react-router-redux)
 - [ ] Creation of Containers
 
 ## Installation
