@@ -31,12 +31,14 @@ const write = function(path, tree) {
 
 const getDestinationPath = function(name, type, suffix) {
   const prefix = path.join('src', type, name);
-  return [prefix, suffix].join('.');
+  const portablePrefix = path.sep === '/' ? prefix : prefix.split(path.sep).join('/');
+  return [portablePrefix, suffix].join('.');
 };
 
 const getRelativePath = function(name, type, suffix) {
   const filePath = path.join('..', type, name);
-  return [filePath, suffix].join('.');
+  const portableFilePath = path.sep === '/' ? filePath : filePath.split(path.sep).join('/');
+  return [portableFilePath, suffix].join('.');
 };
 
 const getBaseName = function(path) {
