@@ -2,6 +2,7 @@
 let generator = require('yeoman-generator');
 let walk = require('esprima-walk');
 let utils = require('../app/utils');
+let ejs = require('ejs');
 
 module.exports = generator.Base.extend({
 
@@ -34,19 +35,39 @@ module.exports = generator.Base.extend({
 
   writing: function() {
     const appPath = this.destinationPath('src/containers/App.js');
-    const destination = utils.getDestinationPath(this.name, 'actions', 'js');
     const baseName = utils.getBaseName(this.name);
+    const namespace = this.name.replace(baseName, '')
+    const actionDestination = utils.getDestinationPath(this.name, 'actions', 'js');
+    const constDestination = utils.getDestinationPath(namespace+'const', 'actions', 'js');
     const constantName = (baseName.split(/(?=[A-Z])/).join('_')).toUpperCase();
-    const relativePath = utils.getRelativePath(this.name, 'actions', 'js');
+    const relativeActionPath = utils.getRelativePath(this.name, 'actions', 'js');
 
     // Copy action template
     this.fs.copyTpl(
       this.templatePath('Action.js'),
-      this.destinationPath(destination),
+      this.destinationPath(actionDestination),
       { actionConstant: constantName }
     );
 
+
+    // Add action to const.js file
+    if(this.fs.exists(this.destinationPath(constDestination))){
+      // File exists so we keep existing constants
+      let constTemplate = this.fs.read(this.templatePath('Constant.js'));
+      let newConst = '\n'+ ejs.render(constTemplate, { actionConstant: constantName});
+      utils.append(constDestination, newConst);
+
+    }else{
+      // File does not exists -> we create a new one
+      this.fs.copyTpl(
+        this.templatePath('Constant.js'),
+        this.destinationPath(constDestination),
+        { actionConstant: constantName}
+      );
+    }
+
+
     // Add action to App.js
-    this.attachToApp(appPath, relativePath, baseName);
+    this.attachToApp(appPath, relativeActionPath, baseName);
   }
 });

@@ -29,6 +29,10 @@ const write = function(path, tree) {
   fs.writeFileSync(path, code, 'utf8');
 };
 
+const append = function(path, content) {
+  fs.appendFileSync(path, content, 'utf8');
+};
+
 const getDestinationPath = function(name, type, suffix) {
   const prefix = path.join('src', type, name);
   const portablePrefix = path.sep === '/' ? prefix : prefix.split(path.sep).join('/');
@@ -44,11 +48,12 @@ const getRelativePath = function(name, type, suffix) {
 const getBaseName = function(path) {
   const items = path.split('/');
   return items[items.length - 1];
-}
+};
 
 module.exports = {
   read: read,
   write: write,
+  append: append,
   getDestinationPath: getDestinationPath,
   getBaseName: getBaseName,
   getRelativePath: getRelativePath
