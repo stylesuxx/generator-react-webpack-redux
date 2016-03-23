@@ -15,6 +15,8 @@ describe('react-webpack-redux:action', () => {
    * @param {Function} callback
    */
   function createGeneratedAction(name, callback) {
+
+    // Changed - create an array if name is a string
     name = typeof name === 'string' ? [name] : name
 
     helpers.run(generatorAction)
@@ -22,7 +24,7 @@ describe('react-webpack-redux:action', () => {
         appPath = path.join(tmpDir, 'src/containers/App.js');
         fs.copySync(appSource, appPath);
       })
-      .withArguments(name)
+      .withArguments(name) // Changed from [name] to name
       .on('end', callback);
   }
 
@@ -45,6 +47,7 @@ describe('react-webpack-redux:action', () => {
     });
 
     it('should have two actions in const file', (done) => {
+      // Here I pass an array of namespaced actions
       createGeneratedAction(['items/getItem', 'items/getAnotherItem'], () => {
         assert.file(['src/actions/items/getItem.js', 'src/actions/items/getAnotherItem.js']);
         assert.fileContent('src/actions/items/const.js', "export const GET_ITEM = 'GET_ITEM'");
