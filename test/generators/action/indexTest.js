@@ -7,25 +7,31 @@ let fs = require('fs-extra');
 describe('react-webpack-redux:action', () => {
   const appSource = path.join(__dirname, '../../../generators/root/templates/App.js');
   const generatorAction = path.join(__dirname, '../../../generators/action');
+  const constSource = path.join(__dirname, '../../../generators/root/templates/const.js');
   let appPath = ''
 
   /**
    * Return a newly generated action with given name
    * @param {String} name
    * @param {Function} callback
+   * @param {Boolean} withConstFile - write a const.js file in actions/my/namespace for overwriting tests
    */
-  function createGeneratedAction(name, callback) {
-
-    // Changed - create an array if name is a string
-    name = typeof name === 'string' ? [name] : name
+  function createGeneratedAction(name, callback, withConstFile) {
 
     helpers.run(generatorAction)
       .inTmpDir(function(tmpDir) {
         appPath = path.join(tmpDir, 'src/containers/App.js');
         fs.copySync(appSource, appPath);
+
+        // To test if all constants are kept when creating new actions
+        if(withConstFile) {
+          let namespace = name.match(/(.*\/)/) || ['']; //Extract the namespace
+          let constPath = path.join(tmpDir, 'src/actions/'+ namespace[0] +'const.js');
+          fs.copySync(constSource, constPath);
+        }
       })
-      .withArguments(name) // Changed from [name] to name
-      .on('end', callback);
+      .withArguments([name])
+      .on('end', callback)
   }
 
   describe('When creating a new action', () => {
@@ -46,14 +52,24 @@ describe('react-webpack-redux:action', () => {
       });
     });
 
-    it('should have two actions in const file', (done) => {
-      // Here I pass an array of namespaced actions
-      createGeneratedAction(['items/getItem', 'items/getAnotherItem'], () => {
-        assert.file(['src/actions/items/getItem.js', 'src/actions/items/getAnotherItem.js']);
-        assert.fileContent('src/actions/items/const.js', "export const GET_ITEM = 'GET_ITEM'");
-        assert.fileContent('src/actions/items/const.js', "export const GET_ANOTHER_ITEM = 'GET_ANOTHER_ITEM'");
+    it('should export 2 actions (with namespace)', (done) => {
+      createGeneratedAction('my/huge/namespace/getItem', () => {
+        assert.fileContent('src/actions/my/huge/namespace/const.js', "export const GET_ITEM = 'GET_ITEM'");
+        assert.fileContent('src/actions/my/huge/namespace/const.js', "export const A_RANDOM_ACTION = 'A_RANDOM_ACTION'");
+        assert.fileContent('src/actions/my/huge/namespace/getItem.js', "import GET_ITEM from './const'");
+        assert.fileContent('src/actions/my/huge/namespace/getItem.js', 'type: GET_ITEM');
         done();
-      });
+      }, true);
+    });
+
+    it('should export 2 actions (without namespace)', (done) => {
+      createGeneratedAction('getItem', () => {
+        assert.fileContent('src/actions/const.js', "export const GET_ITEM = 'GET_ITEM'");
+        assert.fileContent('src/actions/const.js', "export const A_RANDOM_ACTION = 'A_RANDOM_ACTION'");
+        assert.fileContent('src/actions/getItem.js', "import GET_ITEM from './const'");
+        assert.fileContent('src/actions/getItem.js', 'type: GET_ITEM');
+        done();
+      }, true);
     });
 
     it('should add the action to App.js', (done) => {

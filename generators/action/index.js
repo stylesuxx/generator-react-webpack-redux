@@ -2,6 +2,7 @@
 let generator = require('yeoman-generator');
 let walk = require('esprima-walk');
 let utils = require('../app/utils');
+let ejs = require('ejs');
 
 module.exports = generator.Base.extend({
 
@@ -41,14 +42,6 @@ module.exports = generator.Base.extend({
     const constantName = (baseName.split(/(?=[A-Z])/).join('_')).toUpperCase();
     const relativeActionPath = utils.getRelativePath(this.name, 'actions', 'js');
 
-    // console.log('appPath ---', appPath)
-    // console.log('actionDestination ---', actionDestination)
-    // console.log('constDestination ---', constDestination)
-    // console.log('baseName ---', this.name)
-    // console.log('namespace ---', namespace)
-    // console.log('constantName ---', constantName)
-    // console.log('relativeActionPath ---', relativeActionPath)
-
     // Copy action template
     this.fs.copyTpl(
       this.templatePath('Action.js'),
@@ -56,23 +49,22 @@ module.exports = generator.Base.extend({
       { actionConstant: constantName }
     );
 
-    // Add action to const file
-    let existingConsts = ''
+
+    // Add action to const.js file
     if(this.fs.exists(this.destinationPath(constDestination))){
       // File exists so we keep existing constants
-      existingConsts = '\n' + this.fs.read(constDestination)
+      let constTemplate = this.fs.read(this.templatePath('Constant.js'));
+      let newConst = '\n'+ ejs.render(constTemplate, { actionConstant: constantName});
+      utils.append(constDestination, newConst);
+
+    }else{
+      // File does not exists -> we create a new one
+      this.fs.copyTpl(
+        this.templatePath('Constant.js'),
+        this.destinationPath(constDestination),
+        { actionConstant: constantName}
+      );
     }
-
-    // we recreate file
-    this.fs.copyTpl(
-      this.templatePath('Constant.js'),
-      this.destinationPath(constDestination),
-      { actionConstant: constantName}
-    );
-
-    // We attach existing constants
-    const newConst = this.fs.read(this.destinationPath(constDestination))
-    this.fs.write(this.destinationPath(constDestination), newConst + existingConsts)
 
 
     // Add action to App.js
