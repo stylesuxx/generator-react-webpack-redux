@@ -71,12 +71,17 @@ module.exports = generator.Base.extend({
     const baseName = utils.getBaseName(this.name);
     const constantName = (baseName.split(/(?=[A-Z])/).join('_')).toUpperCase();
     const relativePath = utils.getRelativePath(this.name, 'actions', 'js');
+    const depth = this.name.split('/').length - 1;
+    const importPath = ['../'.repeat(depth), 'const'].join('');
 
     // Copy action template
     this.fs.copyTpl(
       this.templatePath('Action.js'),
       this.destinationPath(destination),
-      { actionConstant: constantName }
+      {
+        actionConstant: constantName,
+        importPath: importPath
+      }
     );
 
     // Add action to const.js
