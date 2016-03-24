@@ -41,7 +41,7 @@ describe('react-webpack-redux:action', () => {
 
     it('should import the action const', (done) => {
       createGeneratedAction('getItem', () => {
-        assert.fileContent('src/actions/getItem.js', 'import GET_ITEM from \'./const\'');
+        assert.fileContent('src/actions/getItem.js', 'import {GET_ITEM} from \'./const\'');
         done();
       });
     })
@@ -80,7 +80,7 @@ describe('react-webpack-redux:action', () => {
 
     it('should import the action const', (done) => {
       createGeneratedAction('name/space/getItem', () => {
-        assert.fileContent('src/actions/name/space/getItem.js', 'import GET_ITEM from \'./../../const\'');
+        assert.fileContent('src/actions/name/space/getItem.js', 'import {GET_ITEM} from \'./../../const\'');
         done();
       });
     })
