@@ -15,7 +15,6 @@ It also has support for the the features that are available in its parent projec
 There are currently some features missing from the generator. These will be available in a later version:
 
 - [ ] Add optional routing via [react-router-redux](https://github.com/rackt/react-router-redux)
-- [ ] Creation of Containers
 
 ## Installation
 ```bash
@@ -47,6 +46,11 @@ yo react-webpack-redux:action items/addItem
 ## Generating new components
 ```bash
 yo react-webpack-redux:component my/namespaced/components/name
+```
+
+## Generating new containers
+```bash
+yo react-webpack-redux:container my/namespaced/container/Name
 ```
 
 ## Usage
