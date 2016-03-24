@@ -18,31 +18,31 @@ module.exports = generator.Base.extend({
     // Copy the store
     this.fs.copy(
       this.templatePath('store.js'),
-      this.destinationPath(`src/stores/index.js`)
+      this.destinationPath('src/stores/index.js')
     );
 
     // Copy the root reducer
     this.fs.copy(
       this.templatePath('reducer.js'),
-      this.destinationPath(`src/reducers/index.js`)
+      this.destinationPath('src/reducers/index.js')
     );
 
     // Copy the actions const template
     this.fs.copy(
       this.templatePath('const.js'),
-      this.destinationPath(`src/actions/const.js`)
+      this.destinationPath('src/actions/const.js')
     );
 
     // Copy the entry point over the original entry point
     this.fs.copy(
       this.templatePath('index.js'),
-      this.destinationPath(`src/index.js`)
+      this.destinationPath('src/index.js')
     );
 
     // Copy the app container
     this.fs.copy(
       this.templatePath('App.js'),
-      this.destinationPath(`src/containers/App.js`)
+      this.destinationPath('src/containers/App.js')
     );
   }
 });
