@@ -27,6 +27,12 @@ module.exports = generator.Base.extend({
       this.destinationPath(`src/reducers/index.js`)
     );
 
+    // Copy the actions const template
+    this.fs.copy(
+      this.templatePath('const.js'),
+      this.destinationPath(`src/actions/const.js`)
+    );
+
     // Copy the entry point over the original entry point
     this.fs.copy(
       this.templatePath('index.js'),

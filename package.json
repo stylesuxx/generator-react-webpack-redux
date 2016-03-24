@@ -36,7 +36,6 @@
     "release:patch": "npm version patch && npm publish && git push --follow-tags"
   },
   "dependencies": {
-    "ejs": "^2.4.1",
     "escodegen-wallaby": "^1.6.5",
     "esprima-fb": "^15001.1001.0-dev-harmony-fb",
     "esprima-walk": "^0.1.0",

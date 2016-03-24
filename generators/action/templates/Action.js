@@ -1,4 +1,3 @@
-
 import <%= actionConstant %> from './const'
 
 module.exports = function(parameter) {

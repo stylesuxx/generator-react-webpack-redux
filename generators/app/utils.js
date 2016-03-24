@@ -29,10 +29,6 @@ const write = function(path, tree) {
   fs.writeFileSync(path, code, 'utf8');
 };
 
-const append = function(path, content) {
-  fs.appendFileSync(path, content, 'utf8');
-};
-
 const getDestinationPath = function(name, type, suffix) {
   const prefix = path.join('src', type, name);
   const portablePrefix = path.sep === '/' ? prefix : prefix.split(path.sep).join('/');
@@ -53,7 +49,6 @@ const getBaseName = function(path) {
 module.exports = {
   read: read,
   write: write,
-  append: append,
   getDestinationPath: getDestinationPath,
   getBaseName: getBaseName,
   getRelativePath: getRelativePath

@@ -26,7 +26,8 @@ describe('react-webpack-redux:root', () => {
         'src/index.js',
         'src/stores/index.js',
         'src/reducers/index.js',
-        'src/containers/App.js'
+        'src/containers/App.js',
+        'src/actions/const.js'
       ]);
 
       done();
