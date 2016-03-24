@@ -41,7 +41,7 @@ describe('react-webpack-redux:action', () => {
 
     it('should import the action const', (done) => {
       createGeneratedAction('getItem', () => {
-        assert.fileContent('src/actions/getItem.js', "import GET_ITEM from './const'");
+        assert.fileContent('src/actions/getItem.js', 'import GET_ITEM from \'./const\'');
         done();
       });
     })
@@ -61,9 +61,48 @@ describe('react-webpack-redux:action', () => {
     });
 
     it('should add the action to App.js', (done) => {
-      createGeneratedAction('items/getItems', () => {
+      createGeneratedAction('getItems', () => {
         assert.fileContent(appPath, '/* Populated by react-webpack-redux:action */');
-        assert.fileContent(appPath, 'getItems: require(\'../actions/items/getItems.js\')');
+        assert.fileContent(appPath, 'getItems: require(\'../actions/getItems.js\')');
+        done();
+      });
+    });
+  });
+
+  describe('When creating a new names spaced action', () => {
+
+    it('should create the action file', (done) => {
+      createGeneratedAction('name/space/getItem', () => {
+        assert.file(['src/actions/name/space/getItem.js']);
+        done();
+      });
+    });
+
+    it('should import the action const', (done) => {
+      createGeneratedAction('name/space/getItem', () => {
+        assert.fileContent('src/actions/name/space/getItem.js', 'import GET_ITEM from \'./../../const\'');
+        done();
+      });
+    })
+
+    it('should export the action', (done) => {
+      createGeneratedAction('name/space/getItem', () => {
+        assert.fileContent('src/actions/name/space/getItem.js', 'type: GET_ITEM');
+        done();
+      });
+    });
+
+    it('should append the action const export to const.js', (done) => {
+      createGeneratedAction('name/space/getItem', () => {
+        assert.fileContent('src/actions/const.js', 'export const GET_ITEM = \'GET_ITEM\'');
+        done();
+      });
+    });
+
+    it('should add the action to App.js', (done) => {
+      createGeneratedAction('name/space/getItems', () => {
+        assert.fileContent(appPath, '/* Populated by react-webpack-redux:action */');
+        assert.fileContent(appPath, 'getItems: require(\'../actions/name/space/getItems.js\')');
         done();
       });
     });
