@@ -1,0 +1,7 @@
+{
+  "generator-react-webpack": {
+    "appName": "todoDemo",
+    "style": "css",
+    "postcss": false
+  }
+}

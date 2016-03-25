@@ -1,0 +1,19 @@
+.todo-component {
+  border-bottom: 1px solid white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo-component .buttons {
+  display: flex;
+  flex-direction: column; 
+}
+.todo-component .buttons button {
+  color: black;
+  margin: 3px;
+}
+
+.todo-component p {
+  padding: 5px;
+}

@@ -1,0 +1,11 @@
+.filter-component {
+  border: 1px dashed #f00;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.filter-component button {
+  margin: 3px;
+  color: black;
+}

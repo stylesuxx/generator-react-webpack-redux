@@ -1,0 +1,17 @@
+.form-component {
+  border: 1px dashed #f00;
+}
+
+.form-component form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.form-component form input {
+  color: black;
+}
+
+.form-component form input[type=submit] {
+  margin: 3px;
+}
