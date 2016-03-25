@@ -33,7 +33,7 @@ describe('react-webpack-redux:container', () => {
         done();
       });
     });
-    
+
     it('should have the proper prefix', (done) => {
       createGeneratedContainer('TestContainer', () => {
         assert.fileContent('src/containers/TestContainer.js', '../components/Main');
@@ -55,7 +55,7 @@ describe('react-webpack-redux:container', () => {
       });
     });
   });
-  
+
   describe('When creating a new name spaced container', () => {
 
     it('should create the container file', (done) => {
@@ -78,7 +78,7 @@ describe('react-webpack-redux:container', () => {
         done();
       });
     });
-    
+
     it('should have the proper prefix', (done) => {
       createGeneratedContainer('name/space/TestContainer', () => {
         assert.fileContent('src/containers/name/space/TestContainer.js', '../../../components/Main');
