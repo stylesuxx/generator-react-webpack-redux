@@ -15,7 +15,6 @@ It also has support for the the features that are available in its parent projec
 There are currently some features missing from the generator. These will be available in a later version:
 
 - [ ] Add optional routing via [react-router-redux](https://github.com/rackt/react-router-redux)
-- [ ] Creation of Containers
 
 ## Installation
 ```bash
@@ -49,6 +48,11 @@ yo react-webpack-redux:action items/addItem
 yo react-webpack-redux:component my/namespaced/components/name
 ```
 
+## Generating new containers
+```bash
+yo react-webpack-redux:container my/namespaced/container/Name
+```
+
 ## Usage
 Please take a look at [react-webpack-template](https://github.com/weblogixx/react-webpack-template) for an in depth explanation or use `npm run` to get a list of all commands available for building and running your application.
 
@@ -58,7 +62,9 @@ Basics are:
 - `npm run dist`: Create the packed version
 
 ## Contribute
-Contributions are welcomed. If you find something is missing or there are errors hidden somewhere, feel free to add a new issue.
+Contributions are welcome. If you find something is missing or there are errors hidden somewhere, feel free to add a new issue.
+
+If you want to submit a pull request please to so from and against the *develop* branch.
 
 ### Running Tests
 `npm test` or `node node_modules/.bin/mocha`

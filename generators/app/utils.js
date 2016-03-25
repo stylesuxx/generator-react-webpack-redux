@@ -44,7 +44,7 @@ const getRelativePath = function(name, type, suffix) {
 const getBaseName = function(path) {
   const items = path.split('/');
   return items[items.length - 1];
-}
+};
 
 module.exports = {
   read: read,
