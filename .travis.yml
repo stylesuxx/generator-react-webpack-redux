@@ -1,14 +1,10 @@
 language: node_js
 node_js:
-  - '5.5'
-  - '5.4'
-  - '5.3'
-  - '5.2'
-  - '5.1'
-  - '5.0'
-  - '4.2'
-  - '4.1'
-  - '4.0'
+  - '6.2'
+  - '6.1'
+  - '6.0'
+  - '5.11'
+  - '4.4'
 before_install:
   - currentfolder=${PWD##*/}
   - if [ "$currentfolder" != 'generator-react-webpack-redux' ]; then cd .. && eval "mv $currentfolder generator-react-webpack-redux" && cd generator-react-webpack-redux; fi
