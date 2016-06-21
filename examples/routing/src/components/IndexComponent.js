@@ -11,8 +11,9 @@ class IndexComponent extends React.Component {
   render() {
     var elem = <LoginComponent login={this.props.loginAction}/>;
     if(this.props.login) {
-      elem = <LinkComponent url={this.props.url} />;
+      elem = <LinkComponent link={this.props.link} />;
     }
+
     return (
       <div className="index-component">
         {elem}
@@ -26,7 +27,7 @@ IndexComponent.displayName = 'IndexComponent';
 // Uncomment properties you need
 IndexComponent.propTypes = {
   loginAction: React.PropTypes.func.isRequired,
-  url: React.PropTypes.string.isRequired,
+  link: React.PropTypes.element.isRequired,
   login: React.PropTypes.bool.isRequired
 };
 IndexComponent.defaultProps = {

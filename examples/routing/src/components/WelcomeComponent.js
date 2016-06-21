@@ -6,7 +6,7 @@ require('styles//Welcome.css');
 
 class WelcomeComponent extends React.Component {
   render() {
-    let welcome = '';
+    let welcome = 'Sorry, not logge in.';
     if(this.props.login) {
       welcome = 'You are logged in';
     }

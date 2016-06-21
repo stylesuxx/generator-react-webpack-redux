@@ -8,7 +8,7 @@ class LinkComponent extends React.Component {
   render() {
     return (
       <div className="link-component">
-        <a href={this.props.url}>To the member area</a>
+         {this.props.link}
       </div>
     );
   }
@@ -18,7 +18,7 @@ LinkComponent.displayName = 'LinkComponent';
 
 // Uncomment properties you need
 LinkComponent.propTypes = {
-  url: React.PropTypes.string.isRequired
+  link: React.PropTypes.element.isRequired
 };
 // LinkComponent.defaultProps = {};
 
