@@ -7,7 +7,7 @@ let fs = require('fs-extra');
 describe('react-webpack-redux:action', () => {
   const appSource = path.join(__dirname, '../../../generators/root/templates/App.js');
   const generatorAction = path.join(__dirname, '../../../generators/action');
-  const constSource = path.join(__dirname, '../../../generators/root/templates/const.js');
+  const constSource = path.join(__dirname, '../../../generators/root/templates/action/const.js');
   let appPath = '';
   let constPath = '';
 
