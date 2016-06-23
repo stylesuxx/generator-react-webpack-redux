@@ -9,7 +9,7 @@ module.exports = generator.Base.extend({
     generator.Base.apply(this, arguments);
     this.argument('name', { type: String, required: true });
 
-    this.attachToApp = function(path, actionPath, name) {
+    this.exportAction = function(path, actionPath, name) {
       const actionNode = {
         type: 'Property',
         kind: 'init',
@@ -25,6 +25,37 @@ module.exports = generator.Base.extend({
       walk(tree, function(node) {
         if(node.type === 'VariableDeclarator' && node.id.name === 'actions') {
           node.init.properties.push(actionNode);
+        }
+      });
+
+      utils.write(path, tree);
+    };
+
+    this.attachToApp = function(path, name) {
+      const actionNode = {
+        type: 'Property',
+        kind: 'init',
+        key: { type: 'Identifier', name: name },
+        value: { type: 'Identifier', name: name }
+      };
+
+      const importNode = {
+        type: 'ImportSpecifier',
+        id: {
+          type: 'Identifier',
+          name: name
+        }
+      }
+
+      let tree = utils.read(path);
+      walk(tree, function(node) {
+        if(node.type === 'VariableDeclarator' && node.id.name === 'actions') {
+          node.init.properties.push(actionNode);
+        }
+
+        if(node.type === 'ImportDeclaration' && node.source.value === '../actions/') {
+          console.log(node.specifiers[0])
+          node.specifiers.push(importNode);
         }
       });
 
@@ -68,6 +99,7 @@ module.exports = generator.Base.extend({
     const appPath = this.destinationPath('src/containers/App.js');
     const destination = utils.getDestinationPath(this.name, 'actions', 'js');
     const constPath = this.destinationPath('src/actions/const.js');
+    const indexPath = this.destinationPath('src/actions/index.js');
     const baseName = utils.getBaseName(this.name);
     const constantName = (baseName.split(/(?=[A-Z])/).join('_')).toUpperCase();
     const relativePath = utils.getRelativePath(this.name, 'actions', 'js');
@@ -84,10 +116,13 @@ module.exports = generator.Base.extend({
       }
     );
 
-    // Add action to const.js
+    // Add action to actions/const.js
     this.attachToConstants(constPath, constantName);
 
+    // Export action from actions/index.js
+    this.exportAction(indexPath, relativePath, baseName);
+
     // Add action to App.js
-    this.attachToApp(appPath, relativePath, baseName);
+    this.attachToApp(appPath, baseName);
   }
 });
