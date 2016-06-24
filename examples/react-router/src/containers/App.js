@@ -8,6 +8,9 @@ import React, {
   Component,
   PropTypes
 } from 'react';
+import {
+  login
+} from '../actions/';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Main from '../components/Main';
@@ -34,7 +37,9 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   /* Populated by react-webpack-redux:action */
-  const actions = { login: require('../actions/login.js') };
+  const actions = {
+    login: login
+  };
   const actionMap = { actions: bindActionCreators(actions, dispatch) };
   return actionMap;
 }
