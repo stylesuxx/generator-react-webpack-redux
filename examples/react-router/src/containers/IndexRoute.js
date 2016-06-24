@@ -34,7 +34,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  const actions = { login: login };
+  const actions = { login };
   const actionMap = { actions: bindActionCreators(actions, dispatch) };
   return actionMap;
 }
