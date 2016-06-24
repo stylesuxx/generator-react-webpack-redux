@@ -2,6 +2,7 @@ import React, {
   Component,
   PropTypes
 } from 'react';
+import {login} from '../actions/';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
@@ -33,7 +34,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  const actions = { login: require('../actions/login.js') };
+  const actions = { login };
   const actionMap = { actions: bindActionCreators(actions, dispatch) };
   return actionMap;
 }

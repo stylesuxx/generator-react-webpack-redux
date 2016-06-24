@@ -29,8 +29,14 @@ module.exports = generator.Base.extend({
 
     // Copy the actions const template
     this.fs.copy(
-      this.templatePath('const.js'),
+      this.templatePath('./action/const.js'),
       this.destinationPath('src/actions/const.js')
+    );
+
+    // Copy the actions export template
+    this.fs.copy(
+      this.templatePath('./action/index.js'),
+      this.destinationPath('src/actions/index.js')
     );
 
     // Copy the entry point over the original entry point
