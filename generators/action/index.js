@@ -36,7 +36,8 @@ module.exports = generator.Base.extend({
         type: 'Property',
         kind: 'init',
         key: { type: 'Identifier', name: name },
-        value: { type: 'Identifier', name: name }
+        value: { type: 'Identifier', name: name },
+        shorthand: true
       };
 
       const importNode = {
@@ -54,7 +55,6 @@ module.exports = generator.Base.extend({
         }
 
         if(node.type === 'ImportDeclaration' && node.source.value === '../actions/') {
-          console.log(node.specifiers[0])
           node.specifiers.push(importNode);
         }
       });

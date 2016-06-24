@@ -75,7 +75,7 @@ describe('react-webpack-redux:action', () => {
     it('should add the action to App.js', (done) => {
       createGeneratedAction('getItems', () => {
         assert.fileContent(appPath, 'import { getItems } from \'../actions/\'');
-        assert.fileContent(appPath, 'getItems: getItems');
+        assert.fileContent(appPath, 'const actions = { getItems };');
         done();
       });
     });
@@ -120,7 +120,8 @@ describe('react-webpack-redux:action', () => {
 
     it('should add the action to App.js', (done) => {
       createGeneratedAction('name/space/getItems', () => {
-        assert.fileContent(appPath, 'getItems: getItems');
+        assert.fileContent(appPath, 'import { getItems } from \'../actions/\'');
+        assert.fileContent(appPath, 'const actions = { getItems };');
         done();
       });
     });
