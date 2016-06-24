@@ -15,6 +15,7 @@ It also has support for the the features that are available in its parent projec
 There are currently some features missing from the generator. These will be available in a later version:
 
 - [ ] Add optional routing via [react-router-redux](https://github.com/rackt/react-router-redux)
+- [ ] Scaffold routes
 
 ## Installation
 ```bash
