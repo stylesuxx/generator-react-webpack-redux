@@ -17,7 +17,7 @@ module.exports = generator.Base.extend({
 
     // Copy container template
     this.fs.copyTpl(
-      this.templatePath('Container.js'),
+      this.templatePath('Container.js.jade'),
       this.destinationPath(destination),
       {
         name: baseName,

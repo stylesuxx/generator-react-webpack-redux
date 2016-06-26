@@ -108,7 +108,7 @@ module.exports = generator.Base.extend({
 
     // Copy action template
     this.fs.copyTpl(
-      this.templatePath('Action.js'),
+      this.templatePath('Action.js.jade'),
       this.destinationPath(destination),
       {
         actionConstant: constantName,
