@@ -2,9 +2,9 @@ import React, {
   Component,
   PropTypes
 } from 'react';
-import {} from '../actions/';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {} from '../<%= prefix %>actions/';
 import Main from '../<%= prefix %>components/Main';
 
 class <%= name %> extends Component {
