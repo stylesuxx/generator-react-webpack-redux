@@ -8,15 +8,17 @@ import React, {
   Component,
   PropTypes
 } from 'react';
-import {} from '../actions/';
+import { login } from '../actions/';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Main from '../components/Main';
 /* Populated by react-webpack-redux:reducer */
 class App extends Component {
   render() {
-    const {actions} = this.props;
-    return <Main actions={actions}/>;
+    const {actions, user} = this.props;
+    return (
+      <Main />
+    );
   }
 }
 /* Populated by react-webpack-redux:reducer
@@ -25,16 +27,18 @@ class App extends Component {
  *       adjust it here.
  */
 App.propTypes = {
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
 };
 function mapStateToProps(state) {
   /* Populated by react-webpack-redux:reducer */
-  const props = {};
+  const props = { user: state.user };
   return props;
 }
 function mapDispatchToProps(dispatch) {
   /* Populated by react-webpack-redux:action */
-  const actions = {};
+  const actions = { login };
   const actionMap = { actions: bindActionCreators(actions, dispatch) };
   return actionMap;
 }
