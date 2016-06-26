@@ -17,7 +17,10 @@ class App extends Component {
   render() {
     const {actions, user} = this.props;
     return (
-      <Main />
+      <div>
+        <Main />
+        {this.props.children}
+      </div>
     );
   }
 }
@@ -28,7 +31,6 @@ class App extends Component {
  */
 App.propTypes = {
   actions: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired
 };
 function mapStateToProps(state) {

@@ -4,13 +4,15 @@ import App from './containers/App';
 
 const routes = [
   { path: '/',
-    component: App
-  },
-  { path: '/example',
-    component: Index
-  },
-  { path: '/example/self',
-    component: Self
+    component: App,
+    childRoutes: [
+      { path: 'example',
+        component: Index
+      },
+      { path: 'example/self',
+        component: Self
+      }
+    ]
   }
 ];
 
