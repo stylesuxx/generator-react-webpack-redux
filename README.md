@@ -64,7 +64,7 @@ Basics are:
 ## Contribute
 Contributions are welcome. If you find something is missing or there are errors hidden somewhere, feel free to add a new issue.
 
-If you want to submit a pull request please to so from and against the *develop* branch.
+If you want to submit a pull request please do so from and against the *develop* branch.
 
 ### Running Tests
 `npm test` or `node node_modules/.bin/mocha`
