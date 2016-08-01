@@ -41,14 +41,15 @@
     "esprima-walk": "^0.1.0",
     "generator-react-webpack": "3.3.2",
     "html-wiring": "^1.2.0",
-    "yeoman-generator": "^0.23.4",
+    "yeoman-generator": "^0.24.1",
     "yeoman-welcome": "^1.0.1"
   },
   "devDependencies": {
     "chai": "^3.2.0",
     "fs-extra": "^0.30.0",
-    "mocha": "^2.3.2",
+    "mocha": "^3.0.0",
     "yeoman-assert": "^2.1.1",
+    "yeoman-generator": "^0.24.1",
     "yeoman-test": "^1.0.0"
   },
   "engines": {
