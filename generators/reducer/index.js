@@ -114,7 +114,7 @@ module.exports = generator.Base.extend({
 
     // Copy the reducers unit test
     this.fs.copyTpl(
-      this.templatePath('Test.js'),
+      this.templatePath('Test.js.jade'),
       this.destinationPath(testDestinationPath),
       { reducerName: baseName }
     );

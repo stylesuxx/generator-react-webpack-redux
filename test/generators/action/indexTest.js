@@ -7,9 +7,11 @@ let fs = require('fs-extra');
 describe('react-webpack-redux:action', () => {
   const appSource = path.join(__dirname, '../../../generators/root/templates/App.js');
   const generatorAction = path.join(__dirname, '../../../generators/action');
-  const constSource = path.join(__dirname, '../../../generators/root/templates/const.js');
+  const constSource = path.join(__dirname, '../../../generators/root/templates/action/const.js');
+  const indexSource = path.join(__dirname, '../../../generators/root/templates/action/index.js');
   let appPath = '';
   let constPath = '';
+  let indexPath = '';
 
   /**
    * Return a newly generated action with given name
@@ -25,6 +27,9 @@ describe('react-webpack-redux:action', () => {
 
         constPath = path.join(tmpDir, 'src/actions/const.js');
         fs.copySync(constSource, constPath);
+
+        indexPath = path.join(tmpDir, 'src/actions/index.js');
+        fs.copySync(indexSource, indexPath);
       })
       .withArguments([name])
       .on('end', callback);
@@ -60,16 +65,23 @@ describe('react-webpack-redux:action', () => {
       });
     });
 
+    it('should export the action from action/index.js', (done) => {
+      createGeneratedAction('getItem', () => {
+        assert.fileContent('src/actions/index.js', 'getItem: require(\'../actions/getItem.js\')');
+        done();
+      });
+    });
+
     it('should add the action to App.js', (done) => {
       createGeneratedAction('getItems', () => {
-        assert.fileContent(appPath, '/* Populated by react-webpack-redux:action */');
-        assert.fileContent(appPath, 'getItems: require(\'../actions/getItems.js\')');
+        assert.fileContent(appPath, 'import { getItems } from \'../actions/\'');
+        assert.fileContent(appPath, 'const actions = { getItems };');
         done();
       });
     });
   });
 
-  describe('When creating a new names spaced action', () => {
+  describe('When creating a new name spaced action', () => {
 
     it('should create the action file', (done) => {
       createGeneratedAction('name/space/getItem', () => {
@@ -99,10 +111,17 @@ describe('react-webpack-redux:action', () => {
       });
     });
 
+    it('should export the action from action/index.js', (done) => {
+      createGeneratedAction('name/space/getItem', () => {
+        assert.fileContent('src/actions/index.js', 'getItem: require(\'../actions/name/space/getItem.js\')');
+        done();
+      });
+    });
+
     it('should add the action to App.js', (done) => {
       createGeneratedAction('name/space/getItems', () => {
-        assert.fileContent(appPath, '/* Populated by react-webpack-redux:action */');
-        assert.fileContent(appPath, 'getItems: require(\'../actions/name/space/getItems.js\')');
+        assert.fileContent(appPath, 'import { getItems } from \'../actions/\'');
+        assert.fileContent(appPath, 'const actions = { getItems };');
         done();
       });
     });
