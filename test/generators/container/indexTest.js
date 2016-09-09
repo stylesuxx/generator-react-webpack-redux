@@ -37,7 +37,7 @@ describe('react-webpack-redux:container', () => {
     it('should have the proper prefix', (done) => {
       createGeneratedContainer('TestContainer', () => {
         assert.fileContent('src/containers/TestContainer.js', '../actions');
-        assert.fileContent('src/containers/TestContainer.js', '../components/Main');
+        assert.fileContent('src/containers/TestContainer.js', '../components/App');
         done();
       });
     });
@@ -83,7 +83,7 @@ describe('react-webpack-redux:container', () => {
     it('should have the proper prefix', (done) => {
       createGeneratedContainer('name/space/TestContainer', () => {
         assert.fileContent('src/containers/name/space/TestContainer.js', '../../../actions');
-        assert.fileContent('src/containers/name/space/TestContainer.js', '../../../components/Main');
+        assert.fileContent('src/containers/name/space/TestContainer.js', '../../../components/App');
         done();
       });
     });
