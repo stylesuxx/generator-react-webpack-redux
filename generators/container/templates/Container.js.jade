@@ -5,12 +5,12 @@ import React, {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {} from '../<%= prefix %>actions/';
-import Main from '../<%= prefix %>components/Main';
+import Main from '../<%= prefix %>components/App';
 
 class <%= name %> extends Component {
   render() {
-    const {actions} = this.props;
-    return <Main actions={actions}/>;
+    const { actions } = this.props;
+    return <Main actions={actions} />;
   }
 }
 
