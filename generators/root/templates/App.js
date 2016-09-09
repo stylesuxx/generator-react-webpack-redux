@@ -11,12 +11,12 @@ import React, {
 import {} from '../actions/';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Main from '../components/Main';
+import Main from '../components/App';
 /* Populated by react-webpack-redux:reducer */
 class App extends Component {
   render() {
-    const {actions} = this.props;
-    return <Main actions={actions}/>;
+    const { actions } = this.props;
+    return <Main actions={actions} />;
   }
 }
 /* Populated by react-webpack-redux:reducer
