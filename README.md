@@ -23,6 +23,12 @@ npm install -g yo
 npm install -g generator-react-webpack-redux
 ```
 
+### Global npm packages
+Install the following packages system wide, to decrease the time needed to scaffold a new project:
+```bash
+npm install -g phantomjs-prebuilt
+```
+
 ## Setting up projects
 ```bash
 # Create a new directory, and `cd` into it:
