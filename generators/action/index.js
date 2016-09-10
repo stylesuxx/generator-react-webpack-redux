@@ -1,68 +1,74 @@
-'use strict';
-let generator = require('yeoman-generator');
-let walk = require('esprima-walk');
-let utils = require('../app/utils');
+const generator = require('yeoman-generator');
+const walk = require('esprima-walk');
+const utils = require('../app/utils');
 
 module.exports = generator.Base.extend({
-
-  constructor: function() {
-    generator.Base.apply(this, arguments);
+  constructor: function constructor() {
+    generator.Base.apply(this, arguments);  // eslint-disable-line prefer-rest-params
     this.argument('name', { type: String, required: true });
 
-    this.exportAction = function(path, actionPath, name) {
+    this.exportAction = function exportAction(filePath, actionPath, name) {
+      const importDeclaration = {
+        type: 'ImportDeclaration',
+        specifiers: [{
+          type: 'ImportDefaultSpecifier',
+          id: { type: 'Identifier', name, range: [] },
+          range: []
+        }],
+        source: { type: 'Literal', value: actionPath },
+        importKind: 'value',
+        range: []
+      };
+
       const actionNode = {
         type: 'Property',
         kind: 'init',
-        key: { type: 'Identifier', name: name },
-        value: {
-          type: 'CallExpression',
-          callee: { type: 'Identifier', name: 'require' },
-          arguments: [ { type: 'Literal', value: actionPath } ]
-        }
+        key: { type: 'Identifier', name },
+        value: { type: 'Identifier', name },
+        shorthand: true
       };
 
-      let tree = utils.read(path);
-      walk(tree, function(node) {
-        if(node.type === 'VariableDeclarator' && node.id.name === 'actions') {
+      const tree = utils.read(filePath);
+      walk(tree, (node) => {
+        if (node.type === 'VariableDeclarator' && node.id.name === 'actions') {
           node.init.properties.push(actionNode);
         }
       });
 
-      utils.write(path, tree);
+      tree.body.unshift(importDeclaration);
+
+      utils.write(filePath, tree);
     };
 
-    this.attachToApp = function(path, name) {
+    this.attachToApp = function attachToApp(filePath, name) {
       const actionNode = {
         type: 'Property',
         kind: 'init',
-        key: { type: 'Identifier', name: name },
-        value: { type: 'Identifier', name: name },
+        key: { type: 'Identifier', name },
+        value: { type: 'Identifier', name },
         shorthand: true
       };
 
       const importNode = {
         type: 'ImportSpecifier',
-        id: {
-          type: 'Identifier',
-          name: name
-        }
-      }
+        id: { type: 'Identifier', name }
+      };
 
-      let tree = utils.read(path);
-      walk(tree, function(node) {
-        if(node.type === 'VariableDeclarator' && node.id.name === 'actions') {
+      const tree = utils.read(filePath);
+      walk(tree, (node) => {
+        if (node.type === 'VariableDeclarator' && node.id.name === 'actions') {
           node.init.properties.push(actionNode);
         }
 
-        if(node.type === 'ImportDeclaration' && node.source.value === '../actions/') {
+        if (node.type === 'ImportDeclaration' && node.source.value === '../actions/') {
           node.specifiers.push(importNode);
         }
       });
 
-      utils.write(path, tree);
+      utils.write(filePath, tree);
     };
 
-    this.attachToConstants = function(path, name) {
+    this.attachToConstants = function attachToConstants(filePath, name) {
       const constantNode = {
         type: 'ExportDeclaration',
         declaration: {
@@ -71,31 +77,25 @@ module.exports = generator.Base.extend({
           declarations: [
             {
               type: 'VariableDeclarator',
-              id: {
-                type: 'Identifier',
-                name: name
-              },
-              init: {
-                type: 'Literal',
-                value: name
-              }
+              id: { type: 'Identifier', name },
+              init: { type: 'Literal', value: name }
             }
           ]
         }
       };
 
-      let tree = utils.read(path);
-      walk(tree, function(node) {
-        if(node.type === 'Program') {
+      const tree = utils.read(filePath);
+      walk(tree, (node) => {
+        if (node.type === 'Program') {
           node.body.push(constantNode);
         }
       });
 
-      utils.write(path, tree);
+      utils.write(filePath, tree);
     };
   },
 
-  writing: function() {
+  writing: function writing() {
     const appPath = this.destinationPath('src/containers/App.js');
     const destination = utils.getDestinationPath(this.name, 'actions', 'js');
     const constPath = this.destinationPath('src/actions/const.js');
@@ -112,7 +112,7 @@ module.exports = generator.Base.extend({
       this.destinationPath(destination),
       {
         actionConstant: constantName,
-        importPath: importPath
+        importPath
       }
     );
 
