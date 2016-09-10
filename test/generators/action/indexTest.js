@@ -1,8 +1,7 @@
-'use strict';
-let path = require('path');
-let assert = require('yeoman-assert');
-let helpers = require('yeoman-test');
-let fs = require('fs-extra');
+const path = require('path');
+const assert = require('yeoman-assert'); // eslint-disable-line
+const helpers = require('yeoman-test'); // eslint-disable-line
+const fs = require('fs-extra'); // eslint-disable-line
 
 describe('react-webpack-redux:action', () => {
   const appSource = path.join(__dirname, '../../../generators/root/templates/App.js');
@@ -21,7 +20,7 @@ describe('react-webpack-redux:action', () => {
   function createGeneratedAction(name, callback) {
 
     helpers.run(generatorAction)
-      .inTmpDir(function(tmpDir) {
+      .inTmpDir((tmpDir) => {
         appPath = path.join(tmpDir, 'src/containers/App.js');
         fs.copySync(appSource, appPath);
 
@@ -46,10 +45,10 @@ describe('react-webpack-redux:action', () => {
 
     it('should import the action const', (done) => {
       createGeneratedAction('getItem', () => {
-        assert.fileContent('src/actions/getItem.js', 'import {GET_ITEM} from \'./const\'');
+        assert.fileContent('src/actions/getItem.js', 'import { GET_ITEM } from \'./const\'');
         done();
       });
-    })
+    });
 
     it('should export the action', (done) => {
       createGeneratedAction('getItem', () => {
@@ -67,7 +66,12 @@ describe('react-webpack-redux:action', () => {
 
     it('should export the action from action/index.js', (done) => {
       createGeneratedAction('getItem', () => {
-        assert.fileContent('src/actions/index.js', 'getItem: require(\'../actions/getItem.js\')');
+        assert.fileContent('src/actions/index.js',
+          'import getItem from \'../actions/getItem.js\';');
+
+        assert.fileContent('src/actions/index.js',
+          'const actions = { getItem };');
+
         done();
       });
     });
@@ -92,10 +96,12 @@ describe('react-webpack-redux:action', () => {
 
     it('should import the action const', (done) => {
       createGeneratedAction('name/space/getItem', () => {
-        assert.fileContent('src/actions/name/space/getItem.js', 'import {GET_ITEM} from \'./../../const\'');
+        assert.fileContent('src/actions/name/space/getItem.js',
+          'import { GET_ITEM } from \'./../../const\'');
+
         done();
       });
-    })
+    });
 
     it('should export the action', (done) => {
       createGeneratedAction('name/space/getItem', () => {
@@ -113,7 +119,12 @@ describe('react-webpack-redux:action', () => {
 
     it('should export the action from action/index.js', (done) => {
       createGeneratedAction('name/space/getItem', () => {
-        assert.fileContent('src/actions/index.js', 'getItem: require(\'../actions/name/space/getItem.js\')');
+        assert.fileContent('src/actions/index.js',
+          'import getItem from \'../actions/name/space/getItem.js\';');
+
+        assert.fileContent('src/actions/index.js',
+          'const actions = { getItem };');
+
         done();
       });
     });
