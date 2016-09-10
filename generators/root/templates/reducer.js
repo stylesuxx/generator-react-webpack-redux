@@ -6,7 +6,8 @@
  *          This modifications only run once when the generator is invoked - if
  *          you edit them, they are not updated again.
  */
-import { combineReducers } from 'redux';
 /* Populated by react-webpack-redux:reducer */
-const reducers = {};
-module.exports = combineReducers(reducers);
+import { combineReducers } from 'redux';
+const reducers = { };
+const combined = combineReducers(reducers);
+module.exports = combined;

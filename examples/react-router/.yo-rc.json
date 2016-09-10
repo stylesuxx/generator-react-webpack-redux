@@ -1,0 +1,8 @@
+{
+  "generator-react-webpack": {
+    "appName": "routing",
+    "style": "css",
+    "postcss": false,
+    "generatedWithVersion": 3
+  }
+}

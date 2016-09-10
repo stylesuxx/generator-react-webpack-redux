@@ -1,26 +1,26 @@
 {
-  "ecmaFeatures": {
-    "modules": true,
-    "jsx": true
-  },
+  "parser": "babel-eslint",
   "env": {
-    "browser": false,
-    "amd": false,
-    "es6": true,
+    "browser": true,
     "node": true,
     "mocha": true
   },
+  "extends": "airbnb",
   "rules": {
-    "comma-dangle": 1,
-    "quotes": [ 1, "single" ],
-    "no-undef": 1,
-    "global-strict": 0,
-    "no-extra-semi": 1,
-    "no-underscore-dangle": 0,
-    "no-console": 0,
-    "no-unused-vars": 1,
-    "no-trailing-spaces": [1, { "skipBlankLines": true }],
-    "no-unreachable": 1,
-    "no-alert": 0
+    "comma-dangle": 0,
+    "padded-blocks": 0,
+    "react/prefer-stateless-function": 0,
+    "no-underscore-dangle": [ "error", { "allowAfterThis": true }],
+    "import/no-unresolved": ["error", {
+        "ignore": [
+          "config",
+          "components/",
+          "stores/",
+          "actions/",
+          "sources/",
+          "styles/",
+          "images/"
+        ]
+    }]
   }
 }

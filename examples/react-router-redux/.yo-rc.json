@@ -1,0 +1,8 @@
+{
+  "generator-react-webpack": {
+    "appName": "reactRouterRedux",
+    "style": "css",
+    "postcss": false,
+    "generatedWithVersion": 3
+  }
+}

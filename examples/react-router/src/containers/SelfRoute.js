@@ -4,21 +4,24 @@ import React, {
 } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Main from '../<%= prefix %>components/Main';
 
-class <%= name %> extends Component {
+import WelcomeComponent from '../components/WelcomeComponent';
+
+class SelfRoute extends Component {
   render() {
-    const {actions} = this.props;
-    return <Main actions={actions}/>;
+    const {actions, user} = this.props;
+    return (
+      <WelcomeComponent login={user.login}/>
+    );
   }
 }
 
-<%= name %>.propTypes = {
+SelfRoute.propTypes = {
   actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
-  const props = {};
+  const props = { user: state.user };
   return props;
 }
 
@@ -28,4 +31,4 @@ function mapDispatchToProps(dispatch) {
   return actionMap;
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(<%= name %>);
+export default connect(mapStateToProps, mapDispatchToProps)(SelfRoute);
