@@ -1,8 +1,8 @@
-const redux = require('redux');
-const reducers = require('../reducers');
+import { createStore } from 'redux';
+import reducers from '../reducers';
 
 function reduxStore(initialState) {
-  const store = redux.createStore(reducers, initialState,
+  const store = createStore(reducers, initialState,
     window.devToolsExtension && window.devToolsExtension());
 
   if (module.hot) {

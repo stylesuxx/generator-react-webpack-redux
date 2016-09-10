@@ -56,4 +56,5 @@ module.exports = generator.Base.extend({
       this.destinationPath('.eslintrc')
     );
   }
+
 });

@@ -1,7 +1,6 @@
-'use strict';
-let path = require('path');
-let assert = require('yeoman-assert');
-let helpers = require('yeoman-test');
+const path = require('path');
+const assert = require('yeoman-assert'); // eslint-disable-line
+const helpers = require('yeoman-test'); // eslint-disable-line
 
 describe('react-webpack-redux:container', () => {
   const generatorContainer = path.join(__dirname, '../../../generators/container');

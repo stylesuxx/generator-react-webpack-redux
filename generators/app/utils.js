@@ -27,7 +27,8 @@ const write = function(path, tree) {
   const options = {
     comment: true,
     format: {
-      indent: { style: '  ' }
+      indent: { style: '  ' },
+      compact: false
     }
   };
 
