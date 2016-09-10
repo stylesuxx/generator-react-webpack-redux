@@ -3,13 +3,13 @@
  * If you change the type from object to something else, do not forget to update
  * src/container/App.js accordingly.
  */
-import { } from '../actions/const';
+import {} from '../actions/const';
 
-const initialState = { };
+const initialState = {};
 
 function reducer(state = initialState, action) {
   /* Keep the reducer clean - do not mutate the original state. */
-  // let nextState = Object.assign({}, state);
+  // const nextState = Object.assign({}, state);
 
   switch (action.type) {
     /*
@@ -25,4 +25,4 @@ function reducer(state = initialState, action) {
   }
 }
 
-export default reducer;
+module.exports = reducer;
