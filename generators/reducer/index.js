@@ -1,3 +1,4 @@
+'use strict';
 const generator = require('yeoman-generator');
 const path = require('path');
 const walk = require('esprima-walk');
