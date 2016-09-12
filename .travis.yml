@@ -6,6 +6,7 @@ node_js:
   - '6.2'
   - '6.1'
   - '6.0'
+  - '4.5'
 before_install:
   - currentfolder=${PWD##*/}
   - if [ "$currentfolder" != 'generator-react-webpack-redux' ]; then cd .. && eval "mv $currentfolder generator-react-webpack-redux" && cd generator-react-webpack-redux; fi
