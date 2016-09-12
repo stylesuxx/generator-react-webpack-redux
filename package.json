@@ -53,8 +53,7 @@
     "yeoman-test": "^1.0.0"
   },
   "engines": {
-    "node": ">=4.0.0",
-    "iojs": ">=1.1.0"
+    "node": ">=6.0.0"
   },
   "license": "MIT"
 }
