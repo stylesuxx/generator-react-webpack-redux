@@ -1,3 +1,4 @@
+'use strict';
 const path = require('path');
 const assert = require('yeoman-assert');  // eslint-disable-line
 const helpers = require('yeoman-test');  // eslint-disable-line
