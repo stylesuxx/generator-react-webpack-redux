@@ -2,11 +2,6 @@
 const fs = require('fs');
 const path = require('path');
 
-/* For regular JS files */
-//const esprima = require('esprima');
-//const escodegen = require('escodegen');
-
-/* For files with JSX syntax */
 const esprimaFb = require('esprima-fb');
 const escodegenJsx = require('escodegen-wallaby');
 
