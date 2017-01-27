@@ -36,13 +36,6 @@ module.exports = generator.Base.extend({
 
       // Install redux and react bindings as requirement
       this.npmInstall(['redux', 'react-redux'], { 'save': true });
-
-      // Rewrite the webpack version the the last know working beta version
-      // It is left here in plain sight, to remind about the pain updating to
-      // a master branch without checking for the actual version.
-      //
-      // TODO: throw this out as soon as the next stable version is released
-      this.npmInstall(['webpack@2.1.0-beta.6'], { 'save-dev': true });
     });
   }
 });
