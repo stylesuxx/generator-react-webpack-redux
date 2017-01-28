@@ -81,6 +81,7 @@ describe('react-webpack-redux:action', () => {
       createGeneratedAction('getItems', () => {
         assert.fileContent(appPath, 'import { getItems } from \'../actions/\'');
         assert.fileContent(appPath, 'const actions = { getItems };');
+        assert.fileContent(appPath, 'getItem: PropTypes.func.isRequired');
         done();
       });
     });
