@@ -55,10 +55,41 @@ class ActionGenerator extends Generator {
         id: { type: 'Identifier', name }
       };
 
+      const propDeclaration = {
+        type: 'Property',
+        key: {
+          type: 'Identifier',
+          name: name
+        },
+        value: {
+          type: 'MemberExpression',
+          object: {
+            type: 'MemberExpression',
+            object: {
+              type: 'Identifier',
+              name: 'PropTypes'
+            },
+            property: {
+              type: 'Identifier',
+              name: 'func'
+            },
+          },
+          property: {
+            type: 'Identifier',
+            name: 'isRequired',
+          }
+        }
+      };
+
       const tree = utils.read(filePath);
       walk(tree, (node) => {
         if (node.type === 'VariableDeclarator' && node.id.name === 'actions') {
           node.init.properties.push(actionNode);
+        }
+
+        if (node.type === 'AssignmentExpression' &&
+            node.left.object.name === 'App') {
+          node.right.properties[0].value.arguments[0].properties.push(propDeclaration);
         }
 
         if (node.type === 'ImportDeclaration' && node.source.value === '../actions/') {
