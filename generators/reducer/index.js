@@ -105,7 +105,7 @@ class ReducerGenerator extends Generator {
             value: {
               type: 'MemberExpression',
               object: { type: 'Identifier', name: 'PropTypes' },
-              property: { type: 'Identifier', name: 'object.isRequired' }
+              property: { type: 'Identifier', name: 'shape({})' }
             }
           };
 
