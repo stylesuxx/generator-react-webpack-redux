@@ -8,10 +8,10 @@ import React, {
   Component,
   PropTypes
 } from 'react';
-import {} from '../actions/';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Main from '../components/App';
+import {} from '../actions/';
 /* Populated by react-webpack-redux:reducer */
 class App extends Component {
   render() {
