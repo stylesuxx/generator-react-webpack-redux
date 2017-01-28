@@ -18,7 +18,7 @@ There are currently some features missing from the generator. These will be avai
 - [ ] Route generator
 
 ## Requirements
-Make sure your nodeJS version is **>=4.5** and npm  version is **>=3.0.0**.
+Make sure your nodeJS version is **>=4.5.0 <5.0.0 || >=5.10** and npm  version is **>=3.0.0**.
 
 ## Installation
 ```bash
@@ -83,4 +83,3 @@ If you want to submit a pull request please do so from and against the *develop*
 
 ## License
 [MIT license](http://opensource.org/licenses/MIT)
-
