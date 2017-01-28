@@ -1,23 +1,21 @@
 'use strict';
-let generator = require('yeoman-generator');
+const Generator = require('yeoman-generator');
 
-module.exports = generator.Base.extend({
+class AppGenerator extends Generator {
 
-  constructor: function() {
-    generator.Base.apply(this, arguments);
-
+  constructor(args, opts) {
+    super(args, opts);
     this.option('skip-install');
-  },
+  }
 
-  install: function() {
-
+  install() {
     if(!this.options['skip-install']) {
       this.installDependencies({ bower: false });
     }
 
     // Run the base react-webpack generator, then run the dispatcher
     this.composeWith(
-      'react-webpack',
+      'generator-react-webpack',
       {
         options: {
           'skip-install': this.options['skip-install']
@@ -38,4 +36,6 @@ module.exports = generator.Base.extend({
       this.npmInstall(['redux', 'react-redux'], { 'save': true });
     });
   }
-});
+};
+
+module.exports = AppGenerator;

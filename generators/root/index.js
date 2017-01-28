@@ -2,12 +2,13 @@
 const Generator = require('yeoman-generator');
 const fs = require('fs');
 
-module.exports = class extends Generator {
+class RootGenerator extends Generator {
 
+  /*
   constructor(args, opts) {
-    super(args, opts); // eslint-disable-line prefer-rest-params
-    this.argument('name', { type: String, required: true });
+    super(args, opts);
   }
+  */
 
   writing() {
     /* Some base functionality needs to be overwritten, so we force yeoman to do
@@ -59,3 +60,5 @@ module.exports = class extends Generator {
     );
   }
 };
+
+module.exports = RootGenerator;

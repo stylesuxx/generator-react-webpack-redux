@@ -4,7 +4,7 @@ const path = require('path');
 const walk = require('esprima-walk');
 const utils = require('../app/utils');
 
-module.exports = class extends Generator {
+class ReducerGenerator extends Generator {
   constructor(args, opts) {
     super(args, opts);
     this.argument('name', { type: String, required: true });
@@ -147,3 +147,5 @@ module.exports = class extends Generator {
     this.attachToApp(appPath, baseName);
   }
 };
+
+module.exports = ReducerGenerator;

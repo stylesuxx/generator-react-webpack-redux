@@ -2,7 +2,7 @@
 const Generator = require('yeoman-generator');
 const utils = require('../app/utils');
 
-module.exports = class extends Generator {
+class ContainerGenerator extends Generator {
 
   constructor(args, opts) {
     super(args, opts);
@@ -26,3 +26,5 @@ module.exports = class extends Generator {
     );
   }
 };
+
+module.exports = ContainerGenerator;

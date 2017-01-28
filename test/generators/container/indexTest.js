@@ -17,7 +17,7 @@ describe('react-webpack-redux:container', () => {
       .on('end', callback);
   }
 
-  describe('When creating a new action', () => {
+  describe('When creating a new container', () => {
 
     it('should create the container file', (done) => {
       createGeneratedContainer('TestContainer', () => {
