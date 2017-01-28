@@ -39,7 +39,7 @@
     "escodegen-wallaby": "1.6.6",
     "esprima-fb": "^15001.1001.0-dev-harmony-fb",
     "esprima-walk": "^0.1.0",
-    "generator-react-webpack": "4.0.1-1",
+    "generator-react-webpack": "git://github.com/react-webpack-generators/generator-react-webpack.git#master",
     "html-wiring": "^1.2.0",
     "yeoman-generator": "^1.1.0",
     "yeoman-welcome": "^1.0.1"
