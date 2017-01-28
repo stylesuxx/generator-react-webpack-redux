@@ -20,7 +20,7 @@ describe('react-webpack-redux:root', () => {
     createGeneratedDispatcher('Dispatcher', () => {
       assert.file([
         '.eslintrc',
-        'src/index.js',
+        'src/client.js',
         'src/stores/index.js',
         'src/reducers/index.js',
         'src/containers/App.js',
