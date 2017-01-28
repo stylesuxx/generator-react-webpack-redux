@@ -56,8 +56,8 @@ module.exports = generator.Base.extend({
 
     // Copy the entry point over the original entry point
     this.fs.copy(
-      this.templatePath('index.js'),
-      this.destinationPath('src/index.js')
+      this.templatePath('client.js'),
+      this.destinationPath('src/client.js')
     );
 
     // Copy the app container
