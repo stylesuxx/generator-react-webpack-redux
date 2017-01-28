@@ -15,7 +15,7 @@ class <%= name %> extends Component {
 }
 
 <%= name %>.propTypes = {
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.shape({})
 };
 
 function mapStateToProps(state) {
