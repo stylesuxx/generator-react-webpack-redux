@@ -7,4 +7,4 @@ import {action1, action2} from '../actions/'
 */
 /* Populated by react-webpack-redux:action */
 const actions = {};
-export default actions;
+module.exports = actions;
