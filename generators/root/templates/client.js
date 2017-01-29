@@ -8,24 +8,24 @@ import configureStore from './stores';
 const store = configureStore();
 
 ReactDOM.render(
-  <Provider store={store}>
-    <AppContainer>
+  <AppContainer>
+    <Provider store={store}>
       <App />
-    </AppContainer>
-  </Provider>,
+    </Provider>
+  </AppContainer>,
   document.getElementById('app')
 );
 
 if (module.hot) {
-  module.hot.accept('./components/App', () => {
+  module.hot.accept('./containers/App', () => {
     const NextApp = require('./containers/App').default; // eslint-disable-line global-require
 
     ReactDOM.render(
-      <Provider store={store}>
-        <AppContainer>
+      <AppContainer>
+        <Provider store={store}>
           <NextApp />
-        </AppContainer>
-      </Provider>,
+        </Provider>
+      </AppContainer>,
       document.getElementById('app')
     );
   });
