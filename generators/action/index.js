@@ -1,10 +1,11 @@
-const generator = require('yeoman-generator');
+'use strict';
+const Generator = require('yeoman-generator');
 const walk = require('esprima-walk');
 const utils = require('../app/utils');
 
-module.exports = generator.Base.extend({
-  constructor: function constructor() {
-    generator.Base.apply(this, arguments);  // eslint-disable-line prefer-rest-params
+class ActionGenerator extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
     this.argument('name', { type: String, required: true });
 
     this.exportAction = function exportAction(filePath, actionPath, name) {
@@ -54,10 +55,41 @@ module.exports = generator.Base.extend({
         id: { type: 'Identifier', name }
       };
 
+      const propDeclaration = {
+        type: 'Property',
+        key: {
+          type: 'Identifier',
+          name: name
+        },
+        value: {
+          type: 'MemberExpression',
+          object: {
+            type: 'MemberExpression',
+            object: {
+              type: 'Identifier',
+              name: 'PropTypes'
+            },
+            property: {
+              type: 'Identifier',
+              name: 'func'
+            },
+          },
+          property: {
+            type: 'Identifier',
+            name: 'isRequired',
+          }
+        }
+      };
+
       const tree = utils.read(filePath);
       walk(tree, (node) => {
         if (node.type === 'VariableDeclarator' && node.id.name === 'actions') {
           node.init.properties.push(actionNode);
+        }
+
+        if (node.type === 'AssignmentExpression' &&
+            node.left.object.name === 'App') {
+          node.right.properties[0].value.arguments[0].properties.push(propDeclaration);
         }
 
         if (node.type === 'ImportDeclaration' && node.source.value === '../actions/') {
@@ -93,17 +125,17 @@ module.exports = generator.Base.extend({
 
       utils.write(filePath, tree);
     };
-  },
+  }
 
-  writing: function writing() {
+  writing() {
     const appPath = this.destinationPath('src/containers/App.js');
-    const destination = utils.getDestinationPath(this.name, 'actions', 'js');
+    const destination = utils.getDestinationPath(this.options.name, 'actions', 'js');
     const constPath = this.destinationPath('src/actions/const.js');
     const indexPath = this.destinationPath('src/actions/index.js');
-    const baseName = utils.getBaseName(this.name);
+    const baseName = utils.getBaseName(this.options.name);
     const constantName = (baseName.split(/(?=[A-Z])/).join('_')).toUpperCase();
-    const relativePath = utils.getRelativePath(this.name, 'actions', 'js');
-    const depth = this.name.split('/').length - 1;
+    const relativePath = utils.getRelativePath(this.options.name, 'actions', 'js');
+    const depth = this.options.name.split('/').length - 1;
     const importPath = ['../'.repeat(depth), 'const'].join('');
 
     // Copy action template
@@ -125,4 +157,6 @@ module.exports = generator.Base.extend({
     // Add action to App.js
     this.attachToApp(appPath, baseName);
   }
-});
+};
+
+module.exports = ActionGenerator;

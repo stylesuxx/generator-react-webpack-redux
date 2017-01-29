@@ -16,11 +16,11 @@ describe('react-webpack-redux:root', () => {
       .on('end', callback);
   }
 
-  it('should create the root reducer, redux store, base container and custom index.js', (done) => {
+  it('should create the root reducer, redux store, base container and custom client.js', (done) => {
     createGeneratedDispatcher('Dispatcher', () => {
       assert.file([
         '.eslintrc',
-        'src/index.js',
+        'src/client.js',
         'src/stores/index.js',
         'src/reducers/index.js',
         'src/containers/App.js',

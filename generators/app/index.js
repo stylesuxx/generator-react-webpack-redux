@@ -1,23 +1,21 @@
 'use strict';
-let generator = require('yeoman-generator');
+const Generator = require('yeoman-generator');
 
-module.exports = generator.Base.extend({
+class AppGenerator extends Generator {
 
-  constructor: function() {
-    generator.Base.apply(this, arguments);
-
+  constructor(args, opts) {
+    super(args, opts);
     this.option('skip-install');
-  },
+  }
 
-  install: function() {
-
+  install() {
     if(!this.options['skip-install']) {
       this.installDependencies({ bower: false });
     }
 
     // Run the base react-webpack generator, then run the dispatcher
     this.composeWith(
-      'react-webpack',
+      'generator-react-webpack',
       {
         options: {
           'skip-install': this.options['skip-install']
@@ -36,13 +34,8 @@ module.exports = generator.Base.extend({
 
       // Install redux and react bindings as requirement
       this.npmInstall(['redux', 'react-redux'], { 'save': true });
-
-      // Rewrite the webpack version the the last know working beta version
-      // It is left here in plain sight, to remind about the pain updating to
-      // a master branch without checking for the actual version.
-      //
-      // TODO: throw this out as soon as the next stable version is released
-      this.npmInstall(['webpack@2.1.0-beta.6'], { 'save-dev': true });
     });
   }
-});
+};
+
+module.exports = AppGenerator;

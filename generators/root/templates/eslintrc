@@ -8,10 +8,12 @@
   "extends": "airbnb",
   "rules": {
     "comma-dangle": ["off"],
+    "import/extensions": 0,
     "no-unused-vars": ["warn"],
     "object-curly-spacing": ["off"],
     "padded-blocks": ["off"],
     "react/jsx-closing-bracket-location": ["off"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/jsx-space-before-closing": ["off"],
     "react/prefer-stateless-function": ["off"],
     "no-underscore-dangle": [ "error", { "allowAfterThis": true }],

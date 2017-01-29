@@ -1,3 +1,4 @@
+/* eslint-disable import/newline-after-import */
 /* Combine all available reducers to a single root reducer.
  *
  * CAUTION: When using the generators, this file is modified in some places.

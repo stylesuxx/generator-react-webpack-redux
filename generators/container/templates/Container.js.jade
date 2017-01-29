@@ -4,7 +4,6 @@ import React, {
 } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import {} from '../<%= prefix %>actions/';
 import Main from '../<%= prefix %>components/App';
 
@@ -16,7 +15,7 @@ class <%= name %> extends Component {
 }
 
 <%= name %>.propTypes = {
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.shape({})
 };
 
 function mapStateToProps(state) {

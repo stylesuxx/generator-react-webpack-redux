@@ -1,6 +1,6 @@
 {
   "name": "generator-react-webpack-redux",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Yeoman generator for ReactJS and Flux (Redux) via Webpack",
   "keywords": [
     "yeoman-generator",
@@ -39,21 +39,20 @@
     "escodegen-wallaby": "1.6.6",
     "esprima-fb": "^15001.1001.0-dev-harmony-fb",
     "esprima-walk": "^0.1.0",
-    "generator-react-webpack": "4.0.1-1",
+    "generator-react-webpack": "git://github.com/react-webpack-generators/generator-react-webpack.git#master",
     "html-wiring": "^1.2.0",
-    "yeoman-generator": "^0.24.1",
+    "yeoman-generator": "^1.1.0",
     "yeoman-welcome": "^1.0.1"
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "fs-extra": "^1.0.0",
+    "fs-extra": "^2.0.0",
     "mocha": "^3.0.0",
     "yeoman-assert": "^2.1.1",
-    "yeoman-generator": "^0.24.1",
     "yeoman-test": "^1.0.0"
   },
   "engines": {
-    "node": ">=4.5.0",
+    "node": ">=4.5.0 <5.0.0 || >=5.10",
     "npm": ">=3.0.0"
   },
   "license": "MIT"

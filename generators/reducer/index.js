@@ -1,12 +1,12 @@
 'use strict';
-const generator = require('yeoman-generator');
+const Generator = require('yeoman-generator');
 const path = require('path');
 const walk = require('esprima-walk');
 const utils = require('../app/utils');
 
-module.exports = generator.Base.extend({
-  constructor: function constructor() {
-    generator.Base.apply(this, arguments); // eslint-disable-line prefer-rest-params
+class ReducerGenerator extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
     this.argument('name', { type: String, required: true });
 
     this.attachToRoot = function attachToRoot(filePath, relativePath, name) {
@@ -105,7 +105,7 @@ module.exports = generator.Base.extend({
             value: {
               type: 'MemberExpression',
               object: { type: 'Identifier', name: 'PropTypes' },
-              property: { type: 'Identifier', name: 'object.isRequired' }
+              property: { type: 'Identifier', name: 'shape({})' }
             }
           };
 
@@ -116,16 +116,16 @@ module.exports = generator.Base.extend({
 
       utils.write(filePath, tree);
     };
-  },
+  }
 
-  writing: function writing() {
+  writing() {
     const appPath = this.destinationPath('src/containers/App.js');
     const rootReducerPath = this.destinationPath('src/reducers/index.js');
-    const destination = utils.getDestinationPath(this.name, 'reducers', 'js');
-    const baseName = utils.getBaseName(this.name);
+    const destination = utils.getDestinationPath(this.options.name, 'reducers', 'js');
+    const baseName = utils.getBaseName(this.options.name);
     const testName = [baseName, 'Test.js'].join('');
     const testDestinationPath = path.join('test', 'reducers', testName);
-    const relativePath = utils.getRelativePath(this.name, 'reducers', 'js');
+    const relativePath = utils.getRelativePath(this.options.name, 'reducers', 'js');
 
     // Copy the reducer template
     this.fs.copy(
@@ -146,4 +146,6 @@ module.exports = generator.Base.extend({
     // Add the reducer to App.js
     this.attachToApp(appPath, baseName);
   }
-});
+};
+
+module.exports = ReducerGenerator;

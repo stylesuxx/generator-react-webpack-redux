@@ -1,29 +1,9 @@
-const generator = require('yeoman-generator');
+'use strict';
+const Generator = require('yeoman-generator');
 const fs = require('fs');
 
-module.exports = generator.Base.extend({
-
-  constructor: function constructor() {
-    generator.Base.apply(this, arguments); // eslint-disable-line prefer-rest-params
-    this.argument('name', { type: String, required: true });
-  },
-
-  /*
-  conflicts: function configuring() {
-    // Rewrite the webpack version the the last know working beta version
-    // It is left here in plain sight, to remind about the pain updating to
-    // a master branch without checking for the actual version.
-    //
-    // TODO: throw this out as soon as the next stable version is released
-    if(fs.existsSync(this.destinationPath('package.json'))) {
-      var config = JSON.parse(fs.readFileSync(this.destinationPath('package.json')));
-      config.devDependencies.webpack = '=2.1.0-beta.6';
-      fs.writeFileSync(this.destinationPath('package.json'), JSON.stringify(config));
-    }
-  },
-  */
-
-  writing: function writing() {
+class RootGenerator extends Generator {
+  writing() {
     /* Some base functionality needs to be overwritten, so we force yeoman to do
      * so. This is not the nicest thing to do, but since this changes are needed
      * it does not make sense to give the user a choice.
@@ -56,8 +36,8 @@ module.exports = generator.Base.extend({
 
     // Copy the entry point over the original entry point
     this.fs.copy(
-      this.templatePath('index.js'),
-      this.destinationPath('src/index.js')
+      this.templatePath('client.js'),
+      this.destinationPath('src/client.js')
     );
 
     // Copy the app container
@@ -72,4 +52,6 @@ module.exports = generator.Base.extend({
       this.destinationPath('.eslintrc')
     );
   }
-});
+};
+
+module.exports = RootGenerator;

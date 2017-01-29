@@ -70,9 +70,9 @@ describe('react-webpack-redux:reducer', () => {
       createGeneratedReducer('test', () => {
         assert.fileContent(appPath, '/* Populated by react-webpack-redux:reducer */');
         assert.fileContent(appPath, 'test: state.test');
-        assert.fileContent(appPath, 'test: PropTypes.object.isRequired');
         assert.fileContent(appPath, 'const {actions, test} = this.props;');
         assert.fileContent(appPath, '<Main actions={actions} test={test}/>');
+        assert.fileContent(appPath, 'test: PropTypes.shape({})');
         done();
       });
     });
