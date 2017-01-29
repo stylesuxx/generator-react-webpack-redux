@@ -15,6 +15,11 @@ describe('react-webpack-redux:component', () => {
 
     helpers.run(generatorComponent)
       .withArguments([name])
+      .on('ready', (instance) => {
+        instance.config.set('style', 'css');
+        instance.config.set('cssmodules', true);
+        instance.config.set('generatedWithVersion', 4);
+      })
       .on('end', callback);
   }
 
@@ -22,6 +27,8 @@ describe('react-webpack-redux:component', () => {
 
     it('should create the component file', (done) => {
       createGeneratedComponent('testing', () => {
+        // TODO: during testing it seems the V3 template is used
+        //       configuration from above does not seem to do anything
         assert.file(['src/components/TestingComponent.js']);
         done();
       });
