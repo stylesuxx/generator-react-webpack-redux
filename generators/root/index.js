@@ -1,6 +1,5 @@
 'use strict';
 const Generator = require('yeoman-generator');
-const fs = require('fs');
 
 class RootGenerator extends Generator {
   writing() {
@@ -12,7 +11,7 @@ class RootGenerator extends Generator {
 
     // Copy the store
     this.fs.copy(
-      this.templatePath('store.js'),
+      this.options.thunk ? this.templatePath('store-thunk.js') : this.templatePath('store.js'),
       this.destinationPath('src/stores/index.js')
     );
 
@@ -52,6 +51,7 @@ class RootGenerator extends Generator {
       this.destinationPath('.eslintrc')
     );
   }
+
 };
 
 module.exports = RootGenerator;

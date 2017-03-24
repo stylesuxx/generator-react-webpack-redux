@@ -8,6 +8,18 @@ class AppGenerator extends Generator {
     this.option('skip-install');
   }
 
+  prompting() {
+    return this.prompt([{
+      type: 'confirm',
+      name: 'thunk',
+      message: 'Would you like to include redux-thunk?',
+      default: false,
+      store: true,
+    }]).then(answers => {
+      this.thunk = answers.thunk;
+    });
+  }
+
   install() {
     if(!this.options['skip-install']) {
       this.installDependencies({ bower: false });
@@ -29,11 +41,18 @@ class AppGenerator extends Generator {
 
       // Run the create root method
       this.composeWith('react-webpack-redux:root', {
-        args: ['Root']
+        args: ['Root'],
+        thunk: this.thunk,
       });
 
-      // Install redux and react bindings as requirement
-      this.npmInstall(['redux', 'react-redux'], { 'save': true });
+      // Install redux and react bindings as requirement and redux-thunk optionally
+      let packages = ['redux', 'react-redux'];
+
+      if (this.thunk) {
+        packages.push('redux-thunk');
+      }
+
+      this.npmInstall(packages, { 'save': true });
     });
   }
 };
