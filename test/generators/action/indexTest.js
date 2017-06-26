@@ -18,21 +18,41 @@ describe('react-webpack-redux:action', () => {
    * @param {String} name
    * @param {Function} callback
    */
-  function createGeneratedAction(name, callback) {
+  function createGeneratedAction(...args) {
+    runGeneratorWithTmpDir(...args, (tmpDir) => {
+      copyAppContainer(tmpDir)
+      copyConst(tmpDir)
+      copyIndex(tmpDir)
+    })
+  }
 
+  function createGeneratedActionWithoutAppContainer(...args){
+    runGeneratorWithTmpDir(...args, (tmpDir) => {
+      copyConst(tmpDir)
+      copyIndex(tmpDir)
+    })
+  }
+
+  function runGeneratorWithTmpDir(name, callback, tmpDirFn) {
     helpers.run(generatorAction)
-      .inTmpDir((tmpDir) => {
-        appPath = path.join(tmpDir, 'src/containers/App.js');
-        fs.copySync(appSource, appPath);
-
-        constPath = path.join(tmpDir, 'src/actions/const.js');
-        fs.copySync(constSource, constPath);
-
-        indexPath = path.join(tmpDir, 'src/actions/index.js');
-        fs.copySync(indexSource, indexPath);
-      })
+      .inTmpDir(tmpDirFn)
       .withArguments([name])
       .on('end', callback);
+  }
+
+  function copyAppContainer(tmpDir) {
+    appPath = path.join(tmpDir, 'src/containers/App.js');
+    fs.copySync(appSource, appPath);
+  }
+
+  function copyConst(tmpDir) {
+    constPath = path.join(tmpDir, 'src/actions/const.js');
+    fs.copySync(constSource, constPath);
+  }
+
+  function copyIndex(tmpDir) {
+    indexPath = path.join(tmpDir, 'src/actions/index.js');
+    fs.copySync(indexSource, indexPath);
   }
 
   describe('When creating a new action', () => {
@@ -77,12 +97,23 @@ describe('react-webpack-redux:action', () => {
       });
     });
 
-    it('should add the action to App.js', (done) => {
-      createGeneratedAction('getItems', () => {
-        assert.fileContent(appPath, 'import { getItems } from \'../actions/\'');
-        assert.fileContent(appPath, 'const actions = { getItems };');
-        assert.fileContent(appPath, 'getItems: PropTypes.func.isRequired');
-        done();
+    context('with App.js', () => {
+      it('should add the action to App.js', (done) => {
+        createGeneratedAction('getItems', () => {
+          assert.fileContent(appPath, 'import { getItems } from \'../actions/\'');
+          assert.fileContent(appPath, 'const actions = { getItems };');
+          assert.fileContent(appPath, 'getItems: PropTypes.func.isRequired');
+          done();
+        });
+      });
+    });
+
+    context('without App.js', () => {
+      it('should not add the action to App.js', (done) => {
+
+        createGeneratedActionWithoutAppContainer('test', () => {
+          done();
+        });
       });
     });
   });
@@ -131,12 +162,25 @@ describe('react-webpack-redux:action', () => {
       });
     });
 
-    it('should add the action to App.js', (done) => {
-      createGeneratedAction('name/space/getItems', () => {
-        assert.fileContent(appPath, 'import { getItems } from \'../actions/\'');
-        assert.fileContent(appPath, 'const actions = { getItems };');
-        done();
+    context('with App.js', () => {
+      it('should add the action to App.js', (done) => {
+
+        createGeneratedAction('name/space/getItems', () => {
+          assert.fileContent(appPath, 'import { getItems } from \'../actions/\'');
+          assert.fileContent(appPath, 'const actions = { getItems };');
+          done();
+        });
       });
     });
+
+    context('without App.js', () => {
+      it('should not add the reducer to App.js', (done) => {
+
+        createGeneratedActionWithoutAppContainer('test', () => {
+          done();
+        });
+      });
+    });
+
   });
 });
