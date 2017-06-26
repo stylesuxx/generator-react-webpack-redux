@@ -94,7 +94,7 @@ describe('react-webpack-redux:reducer', () => {
           done();
         });
       });
-    })
+    });
 
     context('without App.js', () => {
       it('should not add the reducer to App.js', (done) => {
@@ -103,7 +103,7 @@ describe('react-webpack-redux:reducer', () => {
           done();
         });
       });
-    })
+    });
 
   });
 });
