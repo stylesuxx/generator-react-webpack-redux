@@ -19,17 +19,34 @@ describe('react-webpack-redux:reducer', () => {
      * @param {String} name
      * @param {Function} callback
      */
-    function createGeneratedReducer(name, callback) {
-      helpers.run(generatorReducer)
-        .inTmpDir((tmpDir) => {
-          rootReducerPath = path.join(tmpDir, 'src/reducers/index.js');
-          fs.copySync(reducerSource, rootReducerPath);
+    function createGeneratedReducer(...args) {
+      runGeneratorWithTmpDir(...args, (tmpDir) => {
+        copyRootReducer(tmpDir);
+        copyAppContainer(tmpDir);
+      })
+    }
 
-          appPath = path.join(tmpDir, 'src/containers/App.js');
-          fs.copySync(appSource, appPath);
-        })
+    function createGeneratedReducerWithoutAppContainer(...args) {
+      runGeneratorWithTmpDir(...args, (tmpDir) => {
+        copyRootReducer(tmpDir);
+      })
+    }
+
+    function runGeneratorWithTmpDir(name, callback, tmpDirFn){
+      helpers.run(generatorReducer)
+        .inTmpDir(tmpDirFn)
         .withArguments([name])
         .on('end', callback);
+    }
+
+    function copyRootReducer(tmpDir){
+      rootReducerPath = path.join(tmpDir, 'src/reducers/index.js');
+      fs.copySync(reducerSource, rootReducerPath);
+    }
+
+    function copyAppContainer(tmpDir){
+      appPath = path.join(tmpDir, 'src/containers/App.js');
+      fs.copySync(appSource, appPath);
     }
 
     it('should create a reducer when invoked', (done) => {
@@ -65,16 +82,28 @@ describe('react-webpack-redux:reducer', () => {
       });
     });
 
-    it('should add the reducer to App.js', (done) => {
+    context('with App.js', () => {
+      it('should add the reducer to App.js', (done) => {
 
-      createGeneratedReducer('test', () => {
-        assert.fileContent(appPath, '/* Populated by react-webpack-redux:reducer */');
-        assert.fileContent(appPath, 'test: state.test');
-        assert.fileContent(appPath, 'const {actions, test} = this.props;');
-        assert.fileContent(appPath, '<Main actions={actions} test={test}/>');
-        assert.fileContent(appPath, 'test: PropTypes.shape({})');
-        done();
+        createGeneratedReducer('test', () => {
+          assert.fileContent(appPath, '/* Populated by react-webpack-redux:reducer */');
+          assert.fileContent(appPath, 'test: state.test');
+          assert.fileContent(appPath, 'const {actions, test} = this.props;');
+          assert.fileContent(appPath, '<Main actions={actions} test={test}/>');
+          assert.fileContent(appPath, 'test: PropTypes.shape({})');
+          done();
+        });
       });
     });
+
+    context('without App.js', () => {
+      it('should not add the reducer to App.js', (done) => {
+
+        createGeneratedReducerWithoutAppContainer('test', () => {
+          done();
+        });
+      });
+    });
+
   });
 });

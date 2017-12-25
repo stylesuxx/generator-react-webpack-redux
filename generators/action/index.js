@@ -155,7 +155,9 @@ class ActionGenerator extends Generator {
     this.exportAction(indexPath, relativePath, baseName);
 
     // Add action to App.js
-    this.attachToApp(appPath, baseName);
+    if(utils.isPresent(appPath)) {
+      this.attachToApp(appPath, baseName);
+    }
   }
 };
 

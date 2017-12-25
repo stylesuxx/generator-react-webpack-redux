@@ -5,6 +5,10 @@ const path = require('path');
 const esprimaFb = require('esprima-fb');
 const escodegenJsx = require('escodegen-wallaby');
 
+const isPresent = function(path) {
+  return fs.existsSync(path);
+};
+
 const read = function(path) {
   const data = fs.readFileSync(path, 'utf8');
   const options = {
@@ -49,6 +53,7 @@ const getBaseName = function(path) {
 };
 
 module.exports = {
+  isPresent: isPresent,
   read: read,
   write: write,
   getDestinationPath: getDestinationPath,

@@ -144,7 +144,9 @@ class ReducerGenerator extends Generator {
     this.attachToRoot(rootReducerPath, relativePath, baseName);
 
     // Add the reducer to App.js
-    this.attachToApp(appPath, baseName);
+    if(utils.isPresent(appPath)) {
+      this.attachToApp(appPath, baseName);
+    }
   }
 };
 
